@@ -1,0 +1,51 @@
+{
+  "name": "playground",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^6.1.1",
+    "@types/node": "^12.20.7",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/uuid": "^8.3.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.2.3",
+    "uuid": "^8.3.2"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "autoprefixer": "^9.8.6",
+    "eslint": "^7.23.0",
+    "eslint-plugin-react": "^7.23.1",
+    "postcss": "^7.0.35",
+    "prettier-eslint": "^12.0.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4"
+  }
+}
