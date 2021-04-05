@@ -4,7 +4,7 @@
 
 
 # Formatting with prettier + eslint
-- Install VS Code extension `Prettier ESLint` as use it as formatter
+- Install VS Code extension `Prettier ESLint` and use it as formatter
 - Install devDependencies:
     - `eslint`
     - `eslint-plugin-react`

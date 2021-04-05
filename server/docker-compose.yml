@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+    db:
+        image: postgres
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./data/db:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_DB=playground
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
