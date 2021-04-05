@@ -20,6 +20,7 @@ export const Navbar: React.FC = () => {
             <div className="space-x-2">
                 <Button onClick={() => history.push("/")}>Home</Button>
                 <Button onClick={() => history.push("/ecs")}>ECS</Button>
+                <Button onClick={() => history.push("/dialog")}>Dialog</Button>
             </div>
 
             <div>
