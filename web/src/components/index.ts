@@ -4,3 +4,4 @@ export { InputText } from "./InputText";
 export { Button } from "./Button";
 export { Link } from "./Link";
 export { Heading } from "./Heading";
+export { Logo } from "./Logo";

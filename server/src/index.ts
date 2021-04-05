@@ -8,10 +8,17 @@ import { UserResolver } from "./UserResolver";
 import cookieParser from "cookie-parser";
 import { verify } from "jsonwebtoken";
 import { User } from "./entity/User";
-import { createAccessToken, createRefreshToken, setRefreshTokenCookie, TokenPayload } from "./tokens";
+import {
+    createAccessToken,
+    createRefreshToken,
+    setRefreshTokenCookie,
+    TokenPayload,
+} from "./tokens";
+import cors from "cors";
 
 (async () => {
     const app = express();
+    app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
     app.use(cookieParser());
 
     app.post("/refresh_token", async (req, res) => {
@@ -33,8 +40,8 @@ import { createAccessToken, createRefreshToken, setRefreshTokenCookie, TokenPayl
         if (!user) {
             return res.send({ ok: false, message: "invalid payload", accessToken: "" });
         }
-        
-        if(user.refreshTokenVersion !== payload.refreshTokenVersion) {
+
+        if (user.refreshTokenVersion !== payload.refreshTokenVersion) {
             return res.send({ ok: false, message: "invalid payload", accessToken: "" });
         }
 
@@ -60,7 +67,7 @@ import { createAccessToken, createRefreshToken, setRefreshTokenCookie, TokenPayl
         }),
     });
 
-    apolloServer.applyMiddleware({ app });
+    apolloServer.applyMiddleware({ app, cors: false });
 
     app.listen(4444, () => {
         console.log("express server started");

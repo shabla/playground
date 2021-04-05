@@ -13,3 +13,6 @@
     - `@typescript-eslint/parser`
 - Create `.eslintrc.js`
 - Create `prettier.config.js`
+
+# Generate GraphQL queries
+`npm run gen`

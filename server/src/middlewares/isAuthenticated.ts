@@ -16,7 +16,7 @@ export const isAuth: MiddlewareFn<QueryContext> = ({ context }, next) => {
         context.payload = payload as any;
     } catch (err) {
         console.log(err);
-        throw new Error("invalid access token");
+        throw new AuthenticationError("invalid access token");
     }
 
     return next();
