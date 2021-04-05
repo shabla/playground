@@ -6,5 +6,7 @@ module.exports = {
         indent: ["warn", 4],
         quotes: ["warn", "double"],
         semi: ["warn", "always"],
+        "@typescript-eslint/no-empty-interface": ["warn"],
+        "react/prop-types": ["off"]
     },
 };
