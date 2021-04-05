@@ -11,3 +11,7 @@ export const setAccessToken = (token: string): void => {
     console.log(`set access token ${token}`);
     sessionStore.accessToken = token;
 };
+export const isLoggedIn = (): boolean => !!sessionStore.accessToken;
+export const logout = (): void => {
+    sessionStore.accessToken = "";
+};

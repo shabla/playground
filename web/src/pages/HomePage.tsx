@@ -1,26 +1,22 @@
 import React from "react";
 
-import { useUsersQuery } from "generated/graphql";
-import { Link } from "components";
+import { Link, PageWithNavbar, DigitalClock } from "components";
 
 export const HomePage: React.FC = () => {
-    const { data, loading } = useUsersQuery({ fetchPolicy: "network-only" });
-
     return (
-        <div>
-            <h1>Hello world</h1>
+        <PageWithNavbar title="Home Page">
+            <h1>Hello</h1>
+            <p>
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam pariatur quos
+                officia esse repellat officiis quia ratione, nihil nisi laborum eligendi beatae
+                commodi iste asperiores. Iure accusamus perspiciatis assumenda quo!
+            </p>
 
-            <Link to="/test">test</Link>
-
-            {loading && <div>loading...</div>}
-
-            {data &&
-                data.users.map((user: any) => (
-                    <div key={user.id}>
-                        {user.id} - {user.email}
-                    </div>
-                ))}
-        </div>
+            <div>
+                <DigitalClock />
+                <Link to="/profile">Go to profile</Link>
+            </div>
+        </PageWithNavbar>
     );
 };
 

@@ -1,0 +1,62 @@
+{
+    "cat_mcmeow": {
+        "id": "cat_mcmeow",
+        "name": "Cat McMeow",
+        "worldImage": "images/char.webp",
+        "portraitImage": "images/portrait.jpg",
+        "initialDialog": "start",
+        "dialogs": {
+            "start": {
+                "steps": [
+                    {
+                        "text": "Hello there!"
+                    },
+                    {
+                        "text": "I like turtles..."
+                    },
+                    {
+                        "text": "Watcha doing?",
+                        "options": [
+                            {
+                                "text": "Not much",
+                                "next": "boring"
+                            },
+                            {
+                                "text": "Coding",
+                                "next": "exciting"
+                            },
+                            {
+                                "text": "None of your business",
+                                "next": "rude"
+                            },
+                            {
+                                "text": "Bye"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "boring": {
+                "steps": [
+                    {
+                        "text": "K"
+                    }
+                ]
+            },
+            "exciting": {
+                "steps": [
+                    {
+                        "text": "Oooh, that sounds fun!"
+                    }
+                ]
+            },
+            "rude": {
+                "steps": [
+                    {
+                        "text": "Alright, alright, nevermind."
+                    }
+                ]
+            }
+        }
+    }
+}

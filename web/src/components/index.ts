@@ -5,3 +5,6 @@ export { Button } from "./Button";
 export { Link } from "./Link";
 export { Heading } from "./Heading";
 export { Logo } from "./Logo";
+export { PageTitle } from "./PageTitle";
+export { DigitalClock } from "./DigitalClock/DigitalClock";
+export { PageWithNavbar } from "./PageWithNavbar";
