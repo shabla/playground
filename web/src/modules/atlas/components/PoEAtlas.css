@@ -1,0 +1,13 @@
+.atlas-zone:hover {
+    fill: tomato;
+    cursor: pointer;
+}
+
+text.zone-name {
+    z-index: 10;
+    fill: black;
+}
+
+text.watchstones-count {
+    font-size: 36px;
+}
