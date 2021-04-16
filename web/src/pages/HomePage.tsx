@@ -12,7 +12,7 @@ export const HomePage: React.FC = () => {
                 commodi iste asperiores. Iure accusamus perspiciatis assumenda quo!
             </p>
 
-            <div>
+            <div className="my-6">
                 <DigitalClock />
                 <Link to="/profile">Go to profile</Link>
             </div>
