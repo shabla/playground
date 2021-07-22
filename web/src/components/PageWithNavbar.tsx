@@ -16,7 +16,7 @@ export const PageWithNavbar: React.FC<PageWithNavbarProps> = ({
         <>
             <Navbar />
             {title && <PageTitle title={title} />}
-            {withContainer ? <div className="container mx-auto p-3">{children}</div> : children}
+            {withContainer ? <div className="container mx-auto p-2 pt-16 min-h-screen">{children}</div> : children}
         </>
     );
 };

@@ -38,26 +38,24 @@ export const App: React.FC = () => {
 
     return (
         <div className={classnames("App", "h-full", { "pt-14": isLoggedIn() })}>
-            <div className="h-full">
-                <Switch>
-                    <Route exact path="/login" component={LoginPage} />
-                    <Route exact path="/register" component={RegisterPage} />
-                    <Route exact path="/" component={HomePage} />
-                    <Route exact path="/ecs" component={ECSPage} />
-                    <Route exact path="/dialog" component={DialogViewerPage} />
-                    <Route exact path="/atlas" component={AtlasPage} />
-                    <Route
-                        path="*"
-                        render={() => {
-                            if (isLoggedIn()) {
-                                return <Redirect to="/" />;
-                            } else {
-                                return <Redirect to="/login" />;
-                            }
-                        }}
-                    />
-                </Switch>
-            </div>
+            <Switch>
+                <Route exact path="/login" component={LoginPage} />
+                <Route exact path="/register" component={RegisterPage} />
+                <Route exact path="/" component={HomePage} />
+                <Route exact path="/ecs" component={ECSPage} />
+                <Route exact path="/dialog" component={DialogViewerPage} />
+                <Route exact path="/atlas" component={AtlasPage} />
+                <Route
+                    path="*"
+                    render={() => {
+                        if (isLoggedIn()) {
+                            return <Redirect to="/" />;
+                        } else {
+                            return <Redirect to="/login" />;
+                        }
+                    }}
+                />
+            </Switch>
         </div>
     );
 };
