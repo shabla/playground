@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Typist from "react-typist";
 import { useSpring, useTrail, animated } from "react-spring";
 import { Icon } from "@blueprintjs/core";
 
@@ -266,16 +265,7 @@ export const DialogWindow: React.FC<DialogWindowProps> = ({ target, onComplete }
                     <CornerHighlights level="top" side="right" />
                     <CornerHighlights level="bottom" side="left" only="horizontal" />
                     <CornerHighlights level="bottom" side="right" />
-
-                    <Typist
-                        key={currentStep?.text} // probably need a better key
-                        avgTypingDelay={10}
-                        stdTypingDelay={10}
-                        startDelay={200}
-                        cursor={{ show: false }}
-                    >
-                        {currentStep?.text}
-                    </Typist>
+ 
 
                     {showNextIcon && <NextStepIcon style={nextStepIconAnimation} />}
                 </InterlocutorText>

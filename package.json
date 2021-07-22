@@ -12,18 +12,11 @@
     },
     "homepage": "https://github.com/shabla/playground#readme",
     "devDependencies": {
-        "@types/cookie-parser": "^1.4.2",
-        "@types/jsonwebtoken": "^8.5.1",
-        "@types/node": "^14.14.37",
+        "@types/node": "^16.4.0",
         "@typescript-eslint/eslint-plugin": "^4.20.0",
         "@typescript-eslint/parser": "^4.20.0",
         "eslint": "^7.23.0",
         "eslint-plugin-react": "^7.23.1",
         "prettier-eslint": "^12.0.0"
-    },
-    "dependencies": {
-        "cookie-parser": "^1.4.5",
-        "dotenv": "^8.2.0",
-        "jsonwebtoken": "^8.5.1"
     }
 }

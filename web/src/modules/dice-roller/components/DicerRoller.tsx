@@ -6,7 +6,6 @@ import { PageWithNavbar, Button, Heading, InputText } from "components";
 import { getRandomInt } from "utils/random";
 import { RollOutput } from "../models";
 import { RollHistory } from "./RollHistory";
-import { getRollStats } from "../utils";
 
 const MIN_DICES = 1;
 const MAX_DICES = 16;
