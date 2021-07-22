@@ -8,6 +8,7 @@ module.exports = {
         extend: {
             margin: ["even"],
             borderWidth: ["first", "last"],
+            backgroundColor: ["even"]
         },
     },
     plugins: [],

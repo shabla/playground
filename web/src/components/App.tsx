@@ -7,6 +7,7 @@ import { RegisterPage } from "pages/RegisterPage";
 import { HomePage } from "pages/HomePage";
 import { ECSPage } from "pages/ECSPage";
 import { AtlasPage } from "modules/atlas";
+import { DiceRoller } from "modules/dice-roller";
 import { DialogViewerPage } from "modules/dialog-system/pages/DialogViewerPage";
 import { setAccessToken, isLoggedIn } from "store";
 
@@ -45,6 +46,7 @@ export const App: React.FC = () => {
                 <Route exact path="/ecs" component={ECSPage} />
                 <Route exact path="/dialog" component={DialogViewerPage} />
                 <Route exact path="/atlas" component={AtlasPage} />
+                <Route exact path="/dice-roller" component={DiceRoller} />
                 <Route
                     path="*"
                     render={() => {

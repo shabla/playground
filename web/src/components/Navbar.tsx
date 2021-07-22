@@ -22,6 +22,7 @@ export const Navbar: React.FC = () => {
                 <Button onClick={() => history.push("/ecs")}>ECS</Button>
                 <Button onClick={() => history.push("/dialog")}>Dialog</Button>
                 <Button onClick={() => history.push("/atlas")}>Atlas</Button>
+                <Button onClick={() => history.push("/dice-roller")}>Dice Roller</Button>
             </div>
 
             <div>
