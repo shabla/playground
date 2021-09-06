@@ -1,55 +1,31 @@
 import "dotenv/config";
 import "reflect-metadata";
-import { createConnection } from "typeorm";
+
 import express from "express";
+import { createConnection } from "typeorm";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./UserResolver";
 import cookieParser from "cookie-parser";
-import { verify } from "jsonwebtoken";
-import { User } from "./entity/User";
-import {
-    createAccessToken,
-    createRefreshToken,
-    setRefreshTokenCookie,
-    TokenPayload,
-} from "./tokens";
+
 import cors from "cors";
+import http from "http";
+
+
+import { initWebSocket } from "./websocket";
+import { registerAuthHandlers } from "./handlers/auth";
 
 (async () => {
     const app = express();
+
     app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
     app.use(cookieParser());
 
-    app.post("/refresh_token", async (req, res) => {
-        const token = req.cookies.jid;
-        if (!token) {
-            return res.send({ ok: false, message: "missing refresh token", accessToken: "" });
-        }
+    registerAuthHandlers(app);
 
-        let payload: TokenPayload;
-        try {
-            payload = verify(token, process.env.REFRESH_TOKEN_SECRET!) as TokenPayload;
-        } catch (err) {
-            console.log(err);
-            return res.send({ ok: false, message: "invalid refresh token", accessToken: "" });
-        }
+    const server = http.createServer(app);
 
-        // token is valid and we can send back an access
-        const user = await User.findOne({ where: { id: payload.userId } });
-        if (!user) {
-            return res.send({ ok: false, message: "invalid payload", accessToken: "" });
-        }
-
-        if (user.refreshTokenVersion !== payload.refreshTokenVersion) {
-            return res.send({ ok: false, message: "invalid payload", accessToken: "" });
-        }
-
-        // refresh the refresh token
-        setRefreshTokenCookie(res, createRefreshToken(user));
-
-        return res.send({ ok: true, accessToken: createAccessToken(user) });
-    });
+    initWebSocket(server);
 
     try {
         await createConnection();
@@ -69,7 +45,7 @@ import cors from "cors";
 
     apolloServer.applyMiddleware({ app, cors: false });
 
-    app.listen(4444, () => {
-        console.log("express server started");
+    server.listen(4444, () => {
+        console.log("express server started", 4444);
     });
 })();

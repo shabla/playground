@@ -25,6 +25,7 @@ export const Button: React.FC<ButtonProps> = ({
             disabled={disabled}
             className={classnames("Button", "no-border rounded", className, {
                 "w-full": fill,
+                "px-3 py-1 text-xs": size === "xs",
                 "px-4 py-1 text-sm": size === "sm",
                 "px-6 py-2 text-md": size === "md",
                 "px-6 py-3 text-lg": size === "lg",

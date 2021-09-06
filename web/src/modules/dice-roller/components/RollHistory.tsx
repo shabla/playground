@@ -3,8 +3,8 @@ import classnames from "classnames";
 
 import { Button } from "components";
 import { RollOutput } from "../models";
-import { DiceResult } from "./DiceResult";
 import { getRollStats } from "../utils";
+import { RollResults } from "./RollResults";
 
 interface RollHistoryProps {
     items: RollOutput[];
@@ -12,24 +12,11 @@ interface RollHistoryProps {
     onReroll: (item: RollOutput) => void;
 }
 
-const RollResults: React.FC<{
-    data: RollOutput;
-}> = ({ data }) => {
-    return (
-        <>
-            {data.results.map((result, resultIndex) => {
-                return (
-                    <DiceResult key={resultIndex} result={result} minSuccess={data.successValue} />
-                );
-            })}
-        </>
-    );
-};
-
 export const RollHistory: React.FC<RollHistoryProps> = ({ items, onRemoveItem, onReroll }) => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+        // Scroll to bottom when items change
         containerRef.current?.scrollTo({
             top: containerRef.current.scrollHeight,
             behavior: "smooth",

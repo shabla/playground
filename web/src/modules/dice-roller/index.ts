@@ -1,1 +1,1 @@
-export * from "./components/DicerRoller";
+export * from "./pages/DiceRollerPage";

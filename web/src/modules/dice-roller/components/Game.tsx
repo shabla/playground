@@ -1,11 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import { Socket } from "socket.io-client";
 
-import { PageWithNavbar, Button, Heading, InputText } from "components";
+import { Button, Heading, InputText } from "components";
 import { getRandomInt } from "utils/random";
 import { RollOutput } from "../models";
-import { RollHistory } from "./RollHistory";
+import { RollHistory } from "../components/RollHistory";
+import { HostSettings } from "../components/HostSettings";
+import { PlayerSettings, GameSettings } from "../models";
 
 const MIN_DICES = 1;
 const MAX_DICES = 16;
@@ -14,39 +17,71 @@ const sliderMarks = Array.from(Array(MAX_DICES)).reduce((acc, _, i) => {
     return acc;
 }, {});
 
-export const DiceRoller: React.FC = () => {
+export interface GameProps {
+    socket: Socket;
+    playerSettings: PlayerSettings;
+    gameSettings: GameSettings;
+    onLeave: () => void;
+}
+
+export const Game: React.FC<GameProps> = ({ socket, playerSettings, gameSettings, onLeave }) => {
     const [history, setHistory] = useState<RollOutput[]>([]);
-    const [name, setName] = useState<string>("Player");
     const [nbDices, setNbDices] = useState<number>(6);
-    const [diceSize, setDiceSize] = useState<number>(10);
-    const [successValue, setSuccessValue] = useState<number>(8);
-    const historyElementRef = useRef<HTMLDivElement>(null);
+    const [players, setPlayers] = useState<PlayerSettings[]>([]);
 
     useEffect(() => {
-        historyElementRef.current?.scrollTo({
-            top: historyElementRef.current.scrollHeight,
-            behavior: "smooth",
-        });
-    }, [history]);
+        const handlers: Record<string, any> = {
+            played_joined: (data: any) => {},
+            player_left: (data: any) => {
+                console.log("todo: display message about player that left");
+            },
+            player_roll: (data: any) => {
+                console.log("todo: do the thing");
+            },
+            player_changed_name: (data: any) => {
+                const { prevName, newName } = data;
 
-    const roll = (): void => {
-        const rollOutput: RollOutput = {
-            timestamp: new Date(),
-            name,
-            nbDices,
-            diceSize,
-            successValue,
-            results: [],
-            rerolls: [],
+                console.log(`${prevName} changed name to ${newName}`);
+            },
+            player_list: (data: any) => {
+                const { players } = data;
+                setPlayers(players);
+            },
         };
 
-        for (let i = 0; i < nbDices; i++) {
-            const value = getRandomInt(1, diceSize);
-            rollOutput.results.push(value);
+        // Register all event handlers
+        for (const evt in handlers) {
+            socket.on(evt, handlers[evt]);
         }
 
-        setHistory([...history, rollOutput]);
-    };
+        return () => {
+            // Deregister all event handlers
+            for (const evt in handlers) {
+                socket.off(evt);
+            }
+        };
+    }, []);
+
+    // const roll = (): void => {
+    //     const rollOutput: RollOutput = {
+    //         timestamp: new Date(),
+    //         name,
+    //         nbDices,
+    //         diceSize,
+    //         successValue,
+    //         results: [],
+    //         rerolls: [],
+    //     };
+
+    //     for (let i = 0; i < nbDices; i++) {
+    //         const value = getRandomInt(1, diceSize);
+    //         rollOutput.results.push(value);
+    //     }
+
+    //     socket.emit("roll", rollOutput);
+
+    //     setHistory([...history, rollOutput]);
+    // };
 
     const onClearHistory = () => setHistory([]);
 
@@ -54,6 +89,10 @@ export const DiceRoller: React.FC = () => {
         const index = history.findIndex((item) => item === itemToRemove);
 
         setHistory([...history.slice(0, index), ...history.slice(index + 1)]);
+    };
+
+    const onChangeName = (name: string): void => {
+        socket.emit("change_name", { name: name });
     };
 
     const onReroll = (item: RollOutput): void => {
@@ -75,13 +114,23 @@ export const DiceRoller: React.FC = () => {
         setHistory([...history.slice(0, index), updatedItem, ...history.slice(index + 1)]);
     };
 
-    console.log(JSON.stringify(history, null, 4));
+    const onLeaveGame = (): void => {
+        socket.emit("leave_game");
+        onLeave();
+    };
 
     return (
-        <PageWithNavbar title="Dice Roller" containerClassName="flex flex-col">
-            <div className="flex flex-grow">
+        <div className="flex flex-grow flex-col">
+            <div className="flex align-center">
+                <b className="mr-3">Game ID:</b> <pre>{gameSettings.id}</pre>{" "}
+                <Button size="xs" className="ml-3" onClick={onLeaveGame}>
+                    Leave Game
+                </Button>
+            </div>
+
+            <div className="flex">
                 <div className="flex-1 p-2 ">
-                    <Heading>Settings</Heading>
+                    <Heading>Player Settings</Heading>
 
                     <div className="flex items-center mb-3 mt-2">
                         <div className="w-40">
@@ -91,39 +140,9 @@ export const DiceRoller: React.FC = () => {
                         <div className="flex-auto">
                             <InputText
                                 id="name-input"
-                                defaultValue={name}
-                                onChange={(e) => setName(e.currentTarget.value)}
+                                defaultValue={playerSettings.name}
+                                onChange={(e) => onChangeName(e.currentTarget.value)}
                             />
-                        </div>
-                    </div>
-
-                    <div className="flex mb-3">
-                        <div className="flex md:flex-1 items-center mr-3">
-                            <div className="w-40 flex-none">
-                                <label htmlFor="success-input">Min Success Value</label>
-                            </div>
-                            <div className="flex-auto">
-                                <InputText
-                                    id="success-input"
-                                    defaultValue={successValue.toString()}
-                                    onChange={(e) =>
-                                        setSuccessValue(parseInt(e.currentTarget.value))
-                                    }
-                                />
-                            </div>
-                        </div>
-
-                        <div className="flex md:flex-1 items-center">
-                            <div className="flex-none mr-2">
-                                <label htmlFor="dice-size-input">Dice Size</label>
-                            </div>
-                            <div className="flex-auto">
-                                <InputText
-                                    id="dice-size-input"
-                                    defaultValue={diceSize.toString()}
-                                    onChange={(e) => setDiceSize(parseInt(e.currentTarget.value))}
-                                />
-                            </div>
                         </div>
                     </div>
 
@@ -149,9 +168,16 @@ export const DiceRoller: React.FC = () => {
                         </div>
                     </div>
 
-                    <Button fill size="lg" onClick={roll}>
-                        Roll {nbDices}d{diceSize}
-                    </Button>
+                    {/* <Button fill size="lg" onClick={roll}>
+                            Roll {nbDices}d{diceSize}
+                        </Button> */}
+
+                    <div>
+                        <Heading>Players List ({players.length})</Heading>
+                        {players.map((player) => {
+                            return <div>{player.name}</div>;
+                        })}
+                    </div>
                 </div>
 
                 <div className="flex flex-col flex-1 p-2">
@@ -167,8 +193,8 @@ export const DiceRoller: React.FC = () => {
                     />
                 </div>
             </div>
-        </PageWithNavbar>
+        </div>
     );
 };
 
-export default DiceRoller;
+export default Game;
