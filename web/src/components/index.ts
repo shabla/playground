@@ -1,10 +1,7 @@
-export { App } from "./App";
-export { Navbar } from "./Navbar";
+export { Navbar } from "./Navbar/Navbar";
 export { InputText } from "./InputText";
-export { Button } from "./Button";
+export * from "./Button/Button";
 export { Link } from "./Link";
 export { Heading } from "./Heading";
-export { Logo } from "./Logo";
 export { PageTitle } from "./PageTitle";
-export { DigitalClock } from "./DigitalClock/DigitalClock";
-export { PageWithNavbar } from "./PageWithNavbar";
+export { Page } from "./Page/Page";

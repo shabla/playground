@@ -1,0 +1,124 @@
+.holo-news {
+  --border-color: #706d75;
+
+  background: #48444f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .section {
+    width: 1000px;
+
+    &__title {
+      font-size: 36px;
+      line-height: 80px;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 0;
+        right: 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+    }
+
+    &__content {
+      position: relative;
+      border-color: var(--border-color);
+      border-style: solid;
+      border-left-width: 2px;
+      border-right-width: 2px;
+      margin-bottom: 3px;
+      margin-top: 5px;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        right: 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        right: 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+    }
+
+    &__row {
+      display: flex;
+      flex-direction: row;
+    }
+
+    &__cell {
+      padding: 20px;
+      border-right: 1px solid var(--border-color);
+      flex-basis: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__header {
+      position: relative;
+
+      .banner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 150px;
+        width: 100%;
+        background-repeat: no-repeat;
+        border-radius: 4px;
+      }
+
+      .member {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        z-index: 1;
+        position: relative;
+        padding-top: 120px;
+        padding-left: 20px;
+
+        .icon {
+          border-radius: 100%;
+          border: 3px solid white;
+        }
+
+        .name {
+          font-size: 42px;
+          margin-left: 20px;
+          border-bottom: 2px solid;
+          font-weight: bold;
+        }
+      }
+    }
+
+    &__text {
+      font-size: 22px;
+      line-height: 26px;
+      padding-left: 20px;
+      margin-top: 15px;
+    }
+
+    &__extra {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-grow: 1;
+
+      img {}
+    }
+  }
+}

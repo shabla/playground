@@ -1,0 +1,56 @@
+:root {
+  --color-gray-700: #374151;
+
+  --white: #fff;
+  --black: #10161A;
+
+  --blue1: #367bf5;
+  --blue2: #6197f3;
+  --green1: #2fa84f;
+  --yellow1: #f3a72e;
+  --red1: #ea3d2f;
+
+  --dark-gray5: #182026;
+  --dark-gray4: #202B33;
+  --dark-gray3: #293742;
+  --dark-gray2: #30404D;
+  --dark-gray1: #394B59;
+
+  --gray5: #5C7080;
+  --gray4: #738694;
+  --gray3: #8A9BA8;
+  --gray2: #A7B6C2;
+  --gray1: #BFCCD6;
+
+  --light-gray5: #CED9E0;
+  --light-gray4: #D8E1E8;
+  --light-gray3: #E1E8ED;
+  --light-gray2: #EBF1F5;
+  --light-gray1: #F5F8FA;
+
+
+  --intent-primary-color-base: var(--blue1);
+  --intent-primary-color-light: var(--blue2);
+  --intent-primary-color-text: var(--white);
+
+  --intent-secondary-color-base: var(--gray5);
+  --intent-secondary-color-light: var(--gray3);
+  --intent-secondary-color-text: var(--white);
+
+  --input-height-xs: 22px;
+  --input-height-sm: 26px;
+  --input-height-md: 32px;
+  --input-height-lg: 36px;
+  --input-height-xl: 44px;
+
+  --navbar-height: 60px;
+
+  // value for filter prop
+  --shadow-sm: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05));
+  --shadow: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
+  --shadow-md: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  --shadow-lg: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+  --shadow-xl: drop-shadow(0 20px 13px rgb(0 0 0 / 0.03)) drop-shadow(0 8px 5px rgb(0 0 0 / 0.08));
+  --shadow-2xl: drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));
+  --shadow-none: drop-shadow(0 0 #0000);
+}

@@ -3,18 +3,18 @@ import styled from "styled-components";
 import { useSpring, useTrail, animated } from "react-spring";
 import { Icon } from "@blueprintjs/core";
 
+import { sleep } from "@/utils/sleep";
 import { getAsset } from "../assets";
 import { Character, Dialog, DialogStep, DialogOption } from "../models/Dialog";
-import { sleep } from "utils/sleep";
 import { CornerHighlights } from "./CornerHighlights";
 
 const theme = {
-    interlocutor: {
-        imageSize: 120,
-        imageFrameSize: 8,
-        nameHeight: 30,
-    },
-    borderRadius: 4,
+  interlocutor: {
+    imageSize: 120,
+    imageFrameSize: 8,
+    nameHeight: 30,
+  },
+  borderRadius: 4,
 };
 const Conversation = styled(animated.div)`
     display: flex;
@@ -37,8 +37,8 @@ const Interlocutor = styled(animated.div)`
 const InterlocutorImageFrame = styled.div`
     width: ${theme.interlocutor.imageSize + 2 * theme.interlocutor.imageFrameSize}px;
     height: ${theme.interlocutor.imageSize +
-    2 * theme.interlocutor.imageFrameSize +
-    theme.interlocutor.nameHeight}px;
+  2 * theme.interlocutor.imageFrameSize +
+  theme.interlocutor.nameHeight}px;
     padding: ${theme.interlocutor.imageFrameSize}px;
     border-radius: ${theme.borderRadius}px;
     flex: 0 0 ${theme.interlocutor.imageSize + 2 * theme.interlocutor.imageFrameSize}px;
@@ -104,8 +104,8 @@ const ConversationChoice = styled(animated.div)`
 `;
 
 const NextStepIcon = styled(animated(Icon)).attrs({
-    icon: "caret-down",
-    iconSize: 20,
+  icon: "caret-down",
+  iconSize: 20,
 })`
     color: white;
     position: absolute;
@@ -114,164 +114,164 @@ const NextStepIcon = styled(animated(Icon)).attrs({
 `;
 
 type DialogWindowProps = {
-    target: Character;
-    onComplete: (target: Character) => void;
+  target: Character;
+  onComplete: (target: Character) => void;
 };
 
 export const DialogWindow: React.FC<DialogWindowProps> = ({ target, onComplete }) => {
-    const [currentDialog, setCurrentDialog] = useState<Dialog>(
+  const [currentDialog, setCurrentDialog] = useState<Dialog>(
+    target.dialogs[target.initialDialog]
+  );
+  const [currentStep, setCurrentStep] = useState<DialogStep & { key?: number }>();
+  const [options, setOptions] = useState<DialogOption[]>([]);
+  const [showNextIcon, setShowNextIcon] = useState<boolean>(false);
+
+  const interlocutorAnimation = useSpring({
+    opacity: 1,
+    transform: "translateY(0) scale(1)",
+    from: {
+      opacity: 0,
+      transform: "translateY(-20%) scale(0.9)",
+    },
+  });
+
+  const conversationAnimation = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+  });
+
+  const nextStepIconAnimation = useSpring({
+    opacity: 1,
+    transform: "scale(1)",
+    from: { opacity: 0, transform: "scale(0.5)" },
+  });
+
+  const choiceAnimation = useTrail(options.length, {
+    opacity: 1,
+    transform: "translateY(0)",
+    from: { opacity: 0, transform: "translateY(75%)" },
+  });
+
+  useEffect(() => {
+    if (target) {
+      console.log(
+        "Update current dialog to initial dialog tree",
         target.dialogs[target.initialDialog]
-    );
-    const [currentStep, setCurrentStep] = useState<DialogStep & { key?: number }>();
-    const [options, setOptions] = useState<DialogOption[]>([]);
-    const [showNextIcon, setShowNextIcon] = useState<boolean>(false);
+      );
+      setCurrentDialog(target.dialogs[target.initialDialog]);
+    }
+  }, [target]);
 
-    const interlocutorAnimation = useSpring({
-        opacity: 1,
-        transform: "translateY(0) scale(1)",
-        from: {
-            opacity: 0,
-            transform: "translateY(-20%) scale(0.9)",
-        },
-    });
+  useEffect(() => {
+    const steps = currentDialog?.steps;
+    if (steps) {
+      console.log("Update current step to first dialog step");
+      setCurrentStep(steps[0]);
+    }
+  }, [currentDialog]);
 
-    const conversationAnimation = useSpring({
-        opacity: 1,
-        from: { opacity: 0 },
-    });
+  useEffect(() => {
+    if (currentStep) {
+      setOptions(currentStep.options || []);
 
-    const nextStepIconAnimation = useSpring({
-        opacity: 1,
-        transform: "scale(1)",
-        from: { opacity: 0, transform: "scale(0.5)" },
-    });
+      const waitingForOption = currentStep.options != null;
+      const nextStep = getNextStep(currentDialog, currentStep);
 
-    const choiceAnimation = useTrail(options.length, {
-        opacity: 1,
-        transform: "translateY(0)",
-        from: { opacity: 0, transform: "translateY(75%)" },
-    });
+      setShowNextIcon(nextStep !== null);
 
-    useEffect(() => {
-        if (target) {
-            console.log(
-                "Update current dialog to initial dialog tree",
-                target.dialogs[target.initialDialog]
-            );
-            setCurrentDialog(target.dialogs[target.initialDialog]);
-        }
-    }, [target]);
+      if (!waitingForOption && !nextStep) {
+        console.log("Not waiting for option and no next step, wait and close");
+        sleep(1000).then(() => onComplete(target));
+      }
+    }
+  }, [target, currentDialog, currentStep, onComplete]);
 
-    useEffect(() => {
-        const steps = currentDialog?.steps;
-        if (steps) {
-            console.log("Update current step to first dialog step");
-            setCurrentStep(steps[0]);
-        }
-    }, [currentDialog]);
+  const getNextStep = (dialog: Dialog, currentStep: DialogStep): DialogStep | null => {
+    if (!dialog.steps) {
+      return null;
+    }
+    const currentStepIndex = dialog.steps.indexOf(currentStep);
+    if (currentStepIndex < 0 || currentStepIndex >= dialog.steps.length - 1) {
+      return null;
+    }
+    return dialog.steps[currentStepIndex + 1];
+  };
 
-    useEffect(() => {
-        if (currentStep) {
-            setOptions(currentStep.options || []);
+  const moveForward = React.useCallback(() => {
+    if (!currentDialog || !currentStep) {
+      return;
+    }
 
-            const waitingForOption = currentStep.options != null;
-            const nextStep = getNextStep(currentDialog, currentStep);
+    const waitingForOption = currentStep.options != null;
+    const nextStep = getNextStep(currentDialog, currentStep);
 
-            setShowNextIcon(nextStep !== null);
+    console.log("Waiting for option?", waitingForOption, "Next step:", nextStep);
 
-            if (!waitingForOption && !nextStep) {
-                console.log("Not waiting for option and no next step, wait and close");
-                sleep(1000).then(() => onComplete(target));
-            }
-        }
-    }, [target, currentDialog, currentStep, onComplete]);
+    if (!waitingForOption && nextStep) {
+      setCurrentStep(nextStep);
+    } else if (!waitingForOption && !nextStep) {
+      onComplete(target);
+    }
+  }, [currentDialog, currentStep, onComplete, target]);
 
-    const getNextStep = (dialog: Dialog, currentStep: DialogStep): DialogStep | null => {
-        if (!dialog.steps) {
-            return null;
-        }
-        const currentStepIndex = dialog.steps.indexOf(currentStep);
-        if (currentStepIndex < 0 || currentStepIndex >= dialog.steps.length - 1) {
-            return null;
-        }
-        return dialog.steps[currentStepIndex + 1];
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      console.log(e);
+      moveForward();
     };
 
-    const moveForward = React.useCallback(() => {
-        if (!currentDialog || !currentStep) {
-            return;
-        }
-
-        const waitingForOption = currentStep.options != null;
-        const nextStep = getNextStep(currentDialog, currentStep);
-
-        console.log("Waiting for option?", waitingForOption, "Next step:", nextStep);
-
-        if (!waitingForOption && nextStep) {
-            setCurrentStep(nextStep);
-        } else if (!waitingForOption && !nextStep) {
-            onComplete(target);
-        }
-    }, [currentDialog, currentStep, onComplete, target]);
-
-    useEffect(() => {
-        const handleKeyPress = (e: KeyboardEvent) => {
-            console.log(e);
-            moveForward();
-        };
-
-        window.addEventListener("keypress", handleKeyPress);
-        return () => {
-            window.removeEventListener("keypress", handleKeyPress);
-        };
-        // this gets recreated every time handlKeyPress changes :(
-    }, [currentStep, moveForward]);
-
-    const handleOptionSelected = (option: DialogOption) => {
-        console.log("Selected option:", option);
-        if (option.next) {
-            setCurrentDialog(target.dialogs[option.next]);
-        } else {
-            onComplete(target);
-        }
+    window.addEventListener("keypress", handleKeyPress);
+    return () => {
+      window.removeEventListener("keypress", handleKeyPress);
     };
+    // this gets recreated every time handlKeyPress changes :(
+  }, [currentStep, moveForward]);
 
-    return (
-        <Conversation style={conversationAnimation}>
-            <ConversationChoices>
-                {choiceAnimation.map((props, index) => (
-                    <ConversationChoice
-                        key={index}
-                        style={props}
-                        onClick={() => handleOptionSelected(options[index])}
-                    >
-                        {options[index].text}
-                    </ConversationChoice>
-                ))}
-            </ConversationChoices>
+  const handleOptionSelected = (option: DialogOption) => {
+    console.log("Selected option:", option);
+    if (option.next) {
+      setCurrentDialog(target.dialogs[option.next]);
+    } else {
+      onComplete(target);
+    }
+  };
 
-            <Interlocutor style={interlocutorAnimation}>
-                <InterlocutorImageFrame>
-                    <CornerHighlights level="top" side="left" />
-                    <CornerHighlights level="top" side="right" />
-                    <CornerHighlights level="bottom" side="left" />
-                    <CornerHighlights level="bottom" side="right" />
-                    <InterlocutorImage src={getAsset(target.portraitImage)} alt="" />
-                    <InterlocutorNameTag>{target.name}</InterlocutorNameTag>
-                </InterlocutorImageFrame>
+  return (
+    <Conversation style={conversationAnimation}>
+      <ConversationChoices>
+        {choiceAnimation.map((props, index) => (
+          <ConversationChoice
+            key={index}
+            style={props}
+            onClick={() => handleOptionSelected(options[index])}
+          >
+            {options[index].text}
+          </ConversationChoice>
+        ))}
+      </ConversationChoices>
 
-                <InterlocutorText onClick={(e) => moveForward()}>
-                    <CornerHighlights level="top" side="left" only="horizontal" />
-                    <CornerHighlights level="top" side="right" />
-                    <CornerHighlights level="bottom" side="left" only="horizontal" />
-                    <CornerHighlights level="bottom" side="right" />
- 
+      <Interlocutor style={interlocutorAnimation}>
+        <InterlocutorImageFrame>
+          <CornerHighlights level="top" side="left" />
+          <CornerHighlights level="top" side="right" />
+          <CornerHighlights level="bottom" side="left" />
+          <CornerHighlights level="bottom" side="right" />
+          <InterlocutorImage src={getAsset(target.portraitImage)} alt="" />
+          <InterlocutorNameTag>{target.name}</InterlocutorNameTag>
+        </InterlocutorImageFrame>
 
-                    {showNextIcon && <NextStepIcon style={nextStepIconAnimation} />}
-                </InterlocutorText>
-            </Interlocutor>
-        </Conversation>
-    );
+        <InterlocutorText onClick={(e) => moveForward()}>
+          <CornerHighlights level="top" side="left" only="horizontal" />
+          <CornerHighlights level="top" side="right" />
+          <CornerHighlights level="bottom" side="left" only="horizontal" />
+          <CornerHighlights level="bottom" side="right" />
+
+
+          {showNextIcon && <NextStepIcon style={nextStepIconAnimation} />}
+        </InterlocutorText>
+      </Interlocutor>
+    </Conversation>
+  );
 };
 
 export default DialogWindow;

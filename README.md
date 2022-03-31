@@ -1,0 +1,4 @@
+- remove tailwind
+- replace create-react-app with vite
+- use css vars for ui components
+- top level script to start everything in one command

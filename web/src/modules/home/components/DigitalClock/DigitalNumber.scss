@@ -1,0 +1,27 @@
+.DigitalNumber {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-right: 5px;
+
+  &:nth-of-type(2n) {
+    margin-right: 20px;
+  }
+
+  .cell {
+    height: 20px;
+    width: 20px;
+    user-select: none;
+    border: 1px solid white;
+    transition: 300ms all ease-out;
+
+    &.on {
+      opacity: 1;
+      background-color: var(--color-gray-700, black);
+    }
+
+    &.off {
+      opacity: 0;
+      transform: scale(50%);
+    }
+  }
+}

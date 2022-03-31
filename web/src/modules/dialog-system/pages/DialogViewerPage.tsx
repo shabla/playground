@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useSpring, animated } from "react-spring";
 import { Icon } from "@blueprintjs/core";
 
-import { Navbar, PageTitle } from "components";
+import { Navbar, PageTitle } from "@/components";
 import { getAsset } from "../assets";
 import { Character } from "../models/Dialog";
 import { DialogWindow } from "../components/DialogWindow";
@@ -52,14 +52,14 @@ const CharacterEntity = styled.div`
         }
 
         ${(props: CharacterEntityProps) =>
-            props.active
-                ? `
+    props.active
+      ? `
                 filter: 
                     drop-shadow(0px 0px 1px #00ff00) 
                     drop-shadow(0px 0px 1px #00ff00)
                     drop-shadow(0px 0px 1px #00ff00);
             `
-                : ""}
+      : ""}
     }
 `;
 
@@ -74,8 +74,8 @@ const AnimatedBlackBar = styled(animated.div)`
 `;
 
 const QuestIcon = styled(Icon).attrs({
-    icon: "error",
-    iconSize: 40,
+  icon: "error",
+  iconSize: 40,
 })`
     @keyframes floaty {
         0% {
@@ -104,45 +104,45 @@ const QuestIcon = styled(Icon).attrs({
 `;
 
 export const DialogViewerPage: React.FC = () => {
-    const [target, setTarget] = useState<Character | null>(null);
+  const [target, setTarget] = useState<Character | null>(null);
 
-    const blackBarProps = useSpring({
-        height: target ? "15%" : "0%",
-        opacity: target ? 1 : 0,
-    });
+  const blackBarProps = useSpring({
+    height: target ? "15%" : "0%",
+    opacity: target ? 1 : 0,
+  });
 
-    return (
-        <Page>
-            <PageTitle title="Dialog Viewer" />
-            <Navbar />
-            <Background focused={target != null} />
-            <AnimatedBlackBar pos="top" style={blackBarProps} />
-            <AnimatedBlackBar pos="bottom" style={blackBarProps} />
+  return (
+    <Page>
+      <PageTitle title="Dialog Viewer" />
+      <Navbar />
+      <Background focused={target != null} />
+      <AnimatedBlackBar pos="top" style={blackBarProps} />
+      <AnimatedBlackBar pos="bottom" style={blackBarProps} />
 
-            {visibleCharacters.map((character: Character, index) => (
-                <div style={{ position: "relative" }} key={index}>
-                    <QuestIcon onClick={() => setTarget(character)} />
-                    <CharacterEntity key={index} active={target === character}>
-                        <img
-                            src={getAsset(character.worldImage)}
-                            alt={character.name}
-                            onClick={() => setTarget(character)}
-                        />
-                    </CharacterEntity>
-                </div>
-            ))}
+      {visibleCharacters.map((character: Character, index) => (
+        <div style={{ position: "relative" }} key={index}>
+          <QuestIcon onClick={() => setTarget(character)} />
+          <CharacterEntity key={index} active={target === character}>
+            <img
+              src={getAsset(character.worldImage)}
+              alt={character.name}
+              onClick={() => setTarget(character)}
+            />
+          </CharacterEntity>
+        </div>
+      ))}
 
-            {target && (
-                <DialogWindow
-                    target={target}
-                    onComplete={(target: Character) => {
-                        console.log("dialog is over");
-                        setTarget(null);
-                    }}
-                />
-            )}
-        </Page>
-    );
+      {target && (
+        <DialogWindow
+          target={target}
+          onComplete={(target: Character) => {
+            console.log("dialog is over");
+            setTarget(null);
+          }}
+        />
+      )}
+    </Page>
+  );
 };
 
 export default DialogViewerPage;

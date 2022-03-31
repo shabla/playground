@@ -1,20 +1,27 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import ReactDOMClient from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
 
-import { App } from "components";
+import { App } from "./App";
 import { apolloClient } from "./apollo-setup";
 
-import "./index.css";
+import "./styles/index.scss";
 
-ReactDOM.render(
-    <React.StrictMode>
-        <ApolloProvider client={apolloClient}>
-            <Router>
-                <App />
-            </Router>
-        </ApolloProvider>
-    </React.StrictMode>,
-    document.getElementById("root")
+const container = document.getElementById("root");
+
+if (!container) {
+  throw Error("Couldn't find #root element");
+}
+
+const root = ReactDOMClient.createRoot(container);
+
+root.render(
+  <React.StrictMode>
+    <ApolloProvider client={apolloClient}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </ApolloProvider>
+  </React.StrictMode>,
 );

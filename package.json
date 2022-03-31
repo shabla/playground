@@ -1,22 +1,15 @@
 {
-    "name": "playground",
-    "version": "0.1.0",
-    "private": true,
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/shabla/playground.git"
-    },
-    "author": "Mathieu Collinge",
-    "bugs": {
-        "url": "https://github.com/shabla/playground/issues"
-    },
-    "homepage": "https://github.com/shabla/playground#readme",
-    "devDependencies": {
-        "@types/node": "^16.4.0",
-        "@typescript-eslint/eslint-plugin": "^4.20.0",
-        "@typescript-eslint/parser": "^4.20.0",
-        "eslint": "^7.23.0",
-        "eslint-plugin-react": "^7.23.1",
-        "prettier-eslint": "^12.0.0"
-    }
+  "name": "playground",
+  "version": "0.1.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shabla/playground.git"
+  },
+  "author": "Mathieu Collinge",
+  "bugs": {
+    "url": "https://github.com/shabla/playground/issues"
+  },
+  "homepage": "https://github.com/shabla/playground#readme",
+  "devDependencies": {}
 }

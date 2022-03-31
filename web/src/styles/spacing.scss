@@ -1,0 +1,32 @@
+$baseDistance: 5;
+$distances: (0, 1, $baseDistance, $baseDistance*2, $baseDistance*3, $baseDistance*4, $baseDistance*5);
+$directions: ("": (m: "margin", p: "padding"),
+  "l": (m: "margin-left", p: "padding-left"),
+  "r": (m: "margin-right", p: "padding-right"),
+  "t": (m: "margin-top", p: "padding-top"),
+  "b": (m: "margin-bottom", p: "padding-bottom"),
+  "x": (m: ("margin-left", "margin-right"), p: ("padding-left", "padding-right")),
+  "y": (m: ("margin-top", "margin-bottom"), p: ("padding-top", "padding-bottom")),
+);
+
+// $dist the value that will be assigned to each prop (ex: 0, 1, 5, 10, ...)
+@each $dist in $distances {
+
+  // $dir is the direction (ex: none, l, r, t, b, x, y) 
+  // $propsMap is a map of each props to generate shortcuts for (ex: m: "margin", p: "padding")
+  @each $dir,
+  $propsMap in $directions {
+
+    @each $propShortcut,
+    $propNames in $propsMap {
+
+      // $propShortcut is the shortcut to use in the class name ("m" and "p")
+      // $propName is an array of css prop names to define (margin-left, margin-bottom, ...)
+      .#{$propShortcut}#{$dir}-#{$dist} {
+        @each $propName in $propNames {
+          #{$propName}: #{$dist}px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.page {
+  height: 100%;
+
+  &.with-navbar {
+    padding-top: var(--navbar-height);
+  }
+
+  &__container {
+    min-height: 100%;
+    width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+}
