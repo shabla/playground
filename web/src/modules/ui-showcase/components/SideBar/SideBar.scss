@@ -1,0 +1,10 @@
+.SideBar {
+  --sidebar-bg: var(--gray1);
+
+  position: fixed;
+  background: var(--sidebar-bg);
+  left: 0;
+  top: var(--navbar-height);
+  width: var(--sidebar-width);
+  height: calc(100% - var(--navbar-height));
+}

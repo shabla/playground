@@ -1,7 +1,5 @@
 .button {
-  --button-border-radius: 3px;
-
-  border-radius: var(--button-border-radius);
+  border-radius: var(--input-border-radius);
   border-width: 1px;
   border-style: solid;
   outline: 0;
@@ -20,7 +18,7 @@
   // Sizes
   height: var(--button-height);
   font-size: var(--button-font-size);
-  line-height: var(--button-font-size);
+  line-height: var(--button-height);
   padding: 0 var(--button-x-padding);
 
   &:hover:not(.disabled) {

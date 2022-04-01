@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useLoginMutation } from "@/generated/graphql";
-import { Page, InputText, Button, Link } from "@/components";
+import { Page, TextField, InputText, Button, Link } from "@/components";
 import { setAccessToken } from "@/store";
 import { Logo } from "../../components/Logo";
 
@@ -11,7 +11,7 @@ import "./LoginPage.scss"
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [login, { loading, error }] = useLoginMutation();
+  const [login, { loading, error, reset }] = useLoginMutation();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
@@ -24,6 +24,9 @@ export const LoginPage: React.FC = () => {
       navigate("/");
     } catch (err) {
       console.error(err);
+      // TODO: save error message or do something with it before reset?
+    } finally {
+      reset();
     }
   };
 
@@ -33,24 +36,25 @@ export const LoginPage: React.FC = () => {
 
       <div className="form-container">
         <form noValidate onSubmit={handleSubmit}>
-          <InputText
+          <TextField
             placeholder="Email"
             defaultValue={email}
             disabled={loading}
-            onChange={(e) => setEmail(e.currentTarget.value)}
+            onChange={setEmail}
           />
 
-          <InputText
+          <TextField
             placeholder="Password"
+            type="password"
             defaultValue={password}
             disabled={loading}
-            onChange={(e) => setPassword(e.currentTarget.value)}
+            onChange={setPassword}
           />
 
           <Button
             type="submit"
-            fill
             intent="primary"
+            fill
             onClick={handleSubmit}
             loading={loading}
           >

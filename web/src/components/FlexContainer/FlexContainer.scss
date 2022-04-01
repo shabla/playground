@@ -1,0 +1,40 @@
+$flexDirections: (row, row-reverse, column, column-reverse);
+$flexWraps: (nowrap, wrap, wrap-reverse);
+$flexAligns: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  space-between: space-between,
+  space-around: space-around,
+  space-evenly: space-evenly,
+);
+
+.d-flex {
+  display: flex;
+}
+
+@each $direction in $flexDirections {
+  .flex-#{$direction} {
+    flex-direction: $direction;
+  }
+}
+
+@each $wrap in $flexWraps {
+  .flex-#{$wrap} {
+    flex-wrap: $wrap;
+  }
+}
+
+// Alignment on main axis
+@each $keyword, $propValue in $flexAligns {
+  .justify-content-#{$keyword} {
+    justify-content: $propValue;
+  }
+}
+
+// Alignment on cross axis
+@each $keyword, $propValue in $flexAligns {
+  .align-items-#{$keyword} {
+    align-items: $propValue;
+  }
+}

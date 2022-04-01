@@ -1,0 +1,118 @@
+.input-container {
+  position: relative;
+  color: var(--input-border-color);
+  width: 100%;
+
+  &.left-icon,
+  &.right-icon {
+    >svg {
+      width: var(--text-field-size) !important;
+      pointer-events: none;
+      position: absolute;
+    }
+  }
+
+  &.left-icon {
+    >svg:first-child {
+      left: 0;
+    }
+
+    >input {
+      padding-left: var(--text-field-size);
+    }
+  }
+
+  &.right-icon {
+    input {
+      padding-right: var(--text-field-size);
+    }
+
+    >svg:last-child {
+      right: 0;
+    }
+  }
+
+  &--xs {
+    --text-field-size: var(--input-height-xs);
+  }
+
+  &--sm {
+    --text-field-size: var(--input-height-sm);
+  }
+
+  &--md {
+    --text-field-size: var(--input-height-md);
+  }
+
+  &--lg {
+    --text-field-size: var(--input-height-lg);
+  }
+
+  &--xl {
+    --text-field-size: var(--input-height-xl);
+  }
+
+  .text-field {
+    height: var(--text-field-size);
+    width: 100%;
+    border-color: var(--input-border-color);
+    border-width: 1px;
+    border-style: solid;
+    border-radius: var(--input-border-radius);
+    outline: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    &:focus-visible {
+      border-color: var(--input-border-color-focused);
+    }
+  }
+}
+
+
+.FormInput {
+  label {
+    font-size: 14px;
+    width: max-content;
+    display: inline-block;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .error-message {
+    color: var(--red1);
+    font-size: 13px;
+    line-height: 15px;
+    min-height: 30px;
+    margin-top: 5px;
+  }
+
+  .required {
+    color: var(--red1);
+    font-weight: 700;
+    margin-left: 3px;
+    user-select: none;
+  }
+
+  .helper-text {
+    color: var(--gray3);
+    font-size: 12px;
+    margin-left: 10px;
+  }
+
+  &.inline {
+    label {
+      margin-bottom: 0;
+      line-height: var(--input-size);
+    }
+
+    .helper-text {
+      margin-left: 0;
+      margin-top: 3px;
+    }
+
+    > :first-of-type {
+      margin-right: 10px;
+    }
+  }
+}

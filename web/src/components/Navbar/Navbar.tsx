@@ -26,6 +26,7 @@ export const Navbar: React.FC = () => {
         <Button onClick={() => navigate("/atlas")}>Atlas</Button>
         <Button onClick={() => navigate("/dice-roller")}>Dice Roller</Button>
         <Button onClick={() => navigate("/holo-news")}>Holo News</Button>
+        <Button onClick={() => navigate("/showcase")}>Showcase</Button>
       </div>
 
       <div>

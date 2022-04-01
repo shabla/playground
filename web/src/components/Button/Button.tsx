@@ -27,7 +27,7 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   type = 'button',
   size = 'md',
-  intent,
+  intent = 'secondary',
   fill,
   simple = false,
   disabled = false,

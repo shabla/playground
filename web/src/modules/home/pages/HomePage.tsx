@@ -2,7 +2,6 @@ import React from "react";
 
 import { Link, Page } from "@/components";
 import { DigitalClock } from "../components/DigitalClock/DigitalClock";
-import { ButtonExample } from "../components/ButtonExample";
 
 export const HomePage: React.FC = () => {
   return (
@@ -16,7 +15,6 @@ export const HomePage: React.FC = () => {
 
       <div>
         <DigitalClock />
-        <ButtonExample />
         <Link to="/profile">Go to profile</Link>
       </div>
     </Page>

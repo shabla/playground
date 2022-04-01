@@ -1,0 +1,21 @@
+.ButtonGroup {
+  >.Button {
+    border-radius: 0;
+    border-right-width: 0;
+
+    &:not(.outline):not(:first-of-type) {
+      border-left-color: var(--input-border-color);
+    }
+
+    &:first-of-type {
+      border-top-left-radius: var(--input-border-radius);
+      border-bottom-left-radius: var(--input-border-radius);
+    }
+
+    &:last-of-type {
+      border-top-right-radius: var(--input-border-radius);
+      border-bottom-right-radius: var(--input-border-radius);
+      border-right-width: 1px;
+    }
+  }
+}

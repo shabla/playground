@@ -7,3 +7,5 @@ export const routes = <>
   <Route path="/login" element={< LoginPage />} />
   <Route path="/register" element={< RegisterPage />} />
 </>
+
+export { TokenRefresher } from "./components/TokenRefresher"

@@ -6,8 +6,6 @@ import { ApolloProvider } from "@apollo/client";
 import { App } from "./App";
 import { apolloClient } from "./apollo-setup";
 
-import "./styles/index.scss";
-
 const container = document.getElementById("root");
 
 if (!container) {
