@@ -1,13 +1,13 @@
 import React from "react";
 import classNames from "classnames";
 
-import { PageTitle, Navbar } from "@/components";
+import appConfig from "@/appConfig";
+import { PageTitle, FlexContainer, FlexContainerProps } from "@/components";
 
 import "./Page.scss"
 
-export interface PageProps {
+export interface PageProps extends Partial<FlexContainerProps> {
   title?: string;
-  navbar?: boolean;
   withContainer?: boolean;
   className?: string;
   containerClassName?: string;
@@ -15,17 +15,19 @@ export interface PageProps {
 
 export const Page: React.FC<PageProps> = ({
   title,
-  navbar = true,
   withContainer = true,
   containerClassName,
   className,
   children,
+  ...flexContainerProps
 }) => {
   return (
     <>
-      {navbar && <Navbar />}
-
-      <div className={classNames("page", { 'with-navbar': navbar }, className)}>
+      <FlexContainer
+        className={classNames("page", { 'with-navbar': appConfig.showNavbar }, className)}
+        direction="column"
+        {...flexContainerProps}
+      >
         {title && <PageTitle title={title} />}
         {withContainer ? (
           <div className={classNames("page__container", containerClassName)}>
@@ -34,7 +36,7 @@ export const Page: React.FC<PageProps> = ({
         ) : (
           children
         )}
-      </div>
+      </FlexContainer>
     </>
   );
 };

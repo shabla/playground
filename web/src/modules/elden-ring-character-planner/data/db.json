@@ -1,0 +1,514 @@
+{
+  "stats": [
+    {
+      "id": "vigor",
+      "name": "Vigor",
+      "description": "Increases HP.\nImproves fire and poison resistance.",
+      "type": "attribute"
+    },
+    {
+      "id": "mind",
+      "name": "Mind",
+      "description": "Increases FP.\nImproves focus-related resistances.",
+      "type": "attribute"
+    },
+    {
+      "id": "end",
+      "name": "Endurance",
+      "description": "Increases Stamina.\nImproves physical defense power and robustness.",
+      "type": "attribute"
+    },
+    {
+      "id": "str",
+      "name": "Strength",
+      "description": "Boosts attack power of strength-scaling armaments.\nRaises maximum equipment load.",
+      "type": "attribute"
+    },
+    {
+      "id": "dex",
+      "name": "Dexterity",
+      "description": "Boosts attack power of dexterity-scaling armaments.\nReduces spells casting time.\nReduces fall damage.\nReduces chances to be knocked off your horse.",
+      "type": "attribute"
+    },
+    {
+      "id": "int",
+      "name": "Intelligence",
+      "description": "Boosts magic damage of intelligence-scaling sorceries and weapons.\nImproves magic resistances.",
+      "type": "attribute"
+    },
+    {
+      "id": "faith",
+      "name": "Faith",
+      "description": "Boosts faith-scaling incantations and weapons.",
+      "type": "attribute"
+    },
+    {
+      "id": "arcane",
+      "name": "Arcane",
+      "description": "Improves Discovery.\nImproves death resistance and certain sorceries and incantations.",
+      "type": "attribute"
+    },
+    {
+      "id": "physdmg",
+      "name": "Physical Attack Damage",
+      "description": "",
+      "type": "offensive"
+    },
+    {
+      "id": "magicdmg",
+      "name": "Magic Attack Damage",
+      "description": "",
+      "type": "offensive"
+    },
+    {
+      "id": "firedmg",
+      "name": "Fire Attack Damage",
+      "description": "",
+      "type": "offensive"
+    },
+    {
+      "id": "lightdmg",
+      "name": "Lightning Attack Damage",
+      "description": "",
+      "type": "offensive"
+    },
+    {
+      "id": "holydmg",
+      "name": "Holy Attack Damage",
+      "description": "",
+      "type": "offensive"
+    },
+    {
+      "id": "critdmg",
+      "name": "Critical Attack Damage",
+      "description": "",
+      "type": "offensive"
+    },
+    {
+      "id": "hp",
+      "name": "Health Points",
+      "description": "",
+      "type": "base"
+    },
+    {
+      "id": "fp",
+      "name": "Focus Points",
+      "description": "",
+      "type": "base"
+    },
+    {
+      "id": "stamina",
+      "name": "Stamina",
+      "description": "",
+      "type": "base"
+    },
+    {
+      "id": "equip_load",
+      "name": "Equipment Load",
+      "description": "",
+      "type": "base"
+    },
+    {
+      "id": "discovery",
+      "name": "Discovery",
+      "description": "",
+      "type": "base"
+    },
+    {
+      "id": "memory_slots",
+      "name": "Memory Slots",
+      "description": "",
+      "type": "base"
+    },
+    {
+      "id": "immunity",
+      "name": "Immunity",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "robustness",
+      "name": "Robustness",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "focus_res",
+      "name": "Focus",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "death_res",
+      "name": "Death Resistance",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "physical_def",
+      "name": "Physical Defense",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "strike_def",
+      "name": "vs Strike Defense",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "slash_def",
+      "name": "vs Slash Defense",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "pierce_def",
+      "name": "vs Pierce Defense",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "magic_def",
+      "name": "Magic Defense",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "fire_def",
+      "name": "Fire Defense",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "lightning_def",
+      "name": "Lightning Defense",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "holy_def",
+      "name": "Holy Defense",
+      "description": "",
+      "type": "defensive"
+    },
+    {
+      "id": "physical_power",
+      "name": "Physical",
+      "description": "Physical Attack Power",
+      "type": "weapon_attack"
+    },
+    {
+      "id": "magic_power",
+      "name": "Magic",
+      "description": "Magic Attack Power",
+      "type": "weapon_attack"
+    },
+    {
+      "id": "fire_power",
+      "name": "Fire",
+      "description": "Fire Attack Power",
+      "type": "weapon_attack"
+    },
+    {
+      "id": "lightning_power",
+      "name": "Lightning",
+      "description": "Lightning Attack Power",
+      "type": "weapon_attack"
+    },
+    {
+      "id": "holy_power",
+      "name": "Holy",
+      "description": "Holy Attack Power",
+      "type": "weapon_attack"
+    },
+    {
+      "id": "critical",
+      "name": "Critical",
+      "description": "Critical Power",
+      "type": "weapon_attack"
+    },
+    {
+      "id": "physical_guard",
+      "name": "Physical",
+      "description": "Physical Guarded Damage Negation",
+      "type": "weapon_guard"
+    },
+    {
+      "id": "magic_guard",
+      "name": "Magic",
+      "description": "Magic Guarded Damage Negation",
+      "type": "weapon_guard"
+    },
+    {
+      "id": "fire_guard",
+      "name": "Fire",
+      "description": "Fire Guarded Damage Negation",
+      "type": "weapon_guard"
+    },
+    {
+      "id": "lightning_guard",
+      "name": "Lightning",
+      "description": "Lightning Guarded Damage Negation",
+      "type": "weapon_guard"
+    },
+    {
+      "id": "holy_guard",
+      "name": "Holy",
+      "description": "Holy Guarded Damage Negation",
+      "type": "weapon_guard"
+    },
+    {
+      "id": "guard_boost",
+      "name": "Guard Boost",
+      "description": "Guard Boost",
+      "type": "weapon_guard"
+    },
+    {
+      "id": "str_scaling",
+      "name": "Str",
+      "description": "",
+      "type": "weapon_scaling"
+    },
+    {
+      "id": "dex_scaling",
+      "name": "Dex",
+      "description": "",
+      "type": "weapon_scaling"
+    },
+    {
+      "id": "int_scaling",
+      "name": "Int",
+      "description": "",
+      "type": "weapon_scaling"
+    },
+    {
+      "id": "faith_scaling",
+      "name": "Fai",
+      "description": "",
+      "type": "weapon_scaling"
+    },
+    {
+      "id": "arcane_scaling",
+      "name": "Arc",
+      "description": "",
+      "type": "weapon_scaling"
+    },
+    {
+      "id": "str_req",
+      "name": "Str",
+      "description": "",
+      "type": "attribute_requirement"
+    },
+    {
+      "id": "dex_req",
+      "name": "Dex",
+      "description": "",
+      "type": "attribute_requirement"
+    },
+    {
+      "id": "int_req",
+      "name": "Int",
+      "description": "",
+      "type": "attribute_requirement"
+    },
+    {
+      "id": "faith_req",
+      "name": "Fai",
+      "description": "",
+      "type": "attribute_requirement"
+    },
+    {
+      "id": "arcane_req",
+      "name": "Arc",
+      "description": "",
+      "type": "attribute_requirement"
+    }
+  ],
+  "classes": [
+    {
+      "id": 1,
+      "name": "Prophet",
+      "level": 7,
+      "base_stats": {
+        "vigor": 10,
+        "mind": 14,
+        "end": 8,
+        "str": 12,
+        "dex": 8,
+        "int": 7,
+        "faith": 16,
+        "arcane": 11
+      }
+    },
+    {
+      "id": 2,
+      "name": "Confessor",
+      "level": 10,
+      "base_stats": {
+        "vigor": 10,
+        "mind": 13,
+        "end": 10,
+        "str": 12,
+        "dex": 12,
+        "int": 9,
+        "faith": 14,
+        "arcane": 9
+      }
+    },
+    {
+      "id": 3,
+      "name": "Vagabond",
+      "level": 9,
+      "base_stats": {
+        "vigor": 15,
+        "mind": 10,
+        "end": 9,
+        "str": 14,
+        "dex": 13,
+        "int": 9,
+        "faith": 9,
+        "arcane": 7
+      }
+    },
+    {
+      "id": 4,
+      "name": "Hero",
+      "level": 7,
+      "base_stats": {
+        "vigor": 14,
+        "mind": 9,
+        "end": 12,
+        "str": 16,
+        "dex": 9,
+        "int": 7,
+        "faith": 8,
+        "arcane": 11
+      }
+    },
+    {
+      "id": 5,
+      "name": "Warrior",
+      "level": 8,
+      "base_stats": {
+        "vigor": 11,
+        "mind": 12,
+        "end": 11,
+        "str": 10,
+        "dex": 16,
+        "int": 10,
+        "faith": 8,
+        "arcane": 9
+      }
+    },
+    {
+      "id": 6,
+      "name": "Bandit",
+      "level": 5,
+      "base_stats": {
+        "vigor": 10,
+        "mind": 11,
+        "end": 10,
+        "str": 9,
+        "dex": 13,
+        "int": 9,
+        "faith": 8,
+        "arcane": 14
+      }
+    },
+    {
+      "id": 7,
+      "name": "Samurai",
+      "level": 9,
+      "base_stats": {
+        "vigor": 12,
+        "mind": 11,
+        "end": 13,
+        "str": 12,
+        "dex": 15,
+        "int": 9,
+        "faith": 8,
+        "arcane": 8
+      }
+    },
+    {
+      "id": 8,
+      "name": "Wretch",
+      "level": 1,
+      "base_stats": {
+        "vigor": 10,
+        "mind": 10,
+        "end": 10,
+        "str": 10,
+        "dex": 10,
+        "int": 10,
+        "faith": 10,
+        "arcane": 10
+      }
+    },
+    {
+      "id": 9,
+      "name": "Astrologer",
+      "level": 6,
+      "base_stats": {
+        "vigor": 9,
+        "mind": 15,
+        "end": 9,
+        "str": 8,
+        "dex": 12,
+        "int": 16,
+        "faith": 7,
+        "arcane": 9
+      }
+    },
+    {
+      "id": 10,
+      "name": "Prisoner",
+      "level": 9,
+      "base_stats": {
+        "vigor": 11,
+        "mind": 12,
+        "end": 11,
+        "str": 11,
+        "dex": 14,
+        "int": 14,
+        "faith": 6,
+        "arcane": 9
+      }
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "name": "Scimitar"
+    },
+    {
+      "id": 2,
+      "name": "Buckler"
+    },
+    {
+      "id": 3,
+      "name": "Blue Cloth Cowl"
+    },
+    {
+      "id": 4,
+      "name": "Blue Cloth Vest"
+    },
+    {
+      "id": 5,
+      "name": "Swordsman Gauntlets"
+    },
+    {
+      "id": 6,
+      "name": "Swordsman Greaves"
+    },
+    {
+      "id": 7,
+      "name": "Flask of Crimson Tears"
+    },
+    {
+      "id": 8,
+      "name": "Flask of Cerulean Tears"
+    }
+  ]
+}

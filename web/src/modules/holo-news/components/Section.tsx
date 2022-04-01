@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Section.scss"
+
 export interface SectionProps {
   title?: string;
 }

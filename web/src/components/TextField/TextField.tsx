@@ -17,6 +17,7 @@ export interface TextFieldProps extends Omit<React.HTMLAttributes<HTMLInputEleme
   rightIcon?: IconName;
   loading?: boolean;
   disabled?: boolean;
+  autoComplete?: boolean;
   onChange?: (value: string, e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -29,6 +30,7 @@ export const TextField: React.FC<TextFieldProps> = ({
   rightIcon,
   loading,
   disabled,
+  autoComplete,
   onChange,
   ...props
 }) => {
@@ -52,6 +54,7 @@ export const TextField: React.FC<TextFieldProps> = ({
         type={type}
         value={value}
         onChange={onChange && (e => onChange(e.currentTarget.value, e))}
+        autoComplete={!autoComplete ? "new-password" : undefined}
         disabled={disabled || loading}
         {...props}
       />

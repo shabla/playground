@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Button, Heading, InputText } from "@/components";
+import { Button, Heading, TextField } from "@/components";
 import { HostSettings } from "../components/HostSettings";
 import { GameSettings } from "../models";
 
@@ -34,10 +34,10 @@ export const ConnectionForm: React.FC<ConnectionFormProps> = ({ onCreateGame, on
           </div>
 
           <div className="flex-auto">
-            <InputText
+            <TextField
               id="game-id-input"
               defaultValue={gameId}
-              onChange={(e) => setGameId(e.currentTarget.value)}
+              onChange={setGameId}
             />
           </div>
         </div>
@@ -49,5 +49,3 @@ export const ConnectionForm: React.FC<ConnectionFormProps> = ({ onCreateGame, on
     </div>
   );
 };
-
-export default ConnectionForm;

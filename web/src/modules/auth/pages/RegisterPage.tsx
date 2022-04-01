@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
 import { useRegisterMutation } from "@/generated/graphql";
-import { InputText, Button, Link, Heading } from "@/components";
+import { Page, TextField, Button, Link, Heading } from "@/components";
 import { Logo } from "../components/Logo";
+import { AuthFormContainer } from "../components/AuthFormContainer";
 
 export const RegisterPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -23,35 +24,35 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="RegisterPage h-full flex flex-col justify-center bg-indigo-50">
-      <div className="logo mx-auto mb-16">
-        <Logo />
-      </div>
+    <Page className="register-page" align="center center" withContainer={false}>
+      <Logo />
 
-      <div className="w-96 mx-auto shadow-md p-7 rounded bg-white">
-        <Heading>Register</Heading>
+      <AuthFormContainer>
+        <Heading className="mb-5">Register</Heading>
 
         <form noValidate onSubmit={handleSubmit} autoComplete="new-password">
-          <InputText
+          <TextField
             className="mb-3"
             placeholder="Email"
             autoComplete={false}
             defaultValue={email}
-            onChange={(e) => setEmail(e.currentTarget.value)}
+            onChange={setEmail}
           />
 
-          <InputText
+          <TextField
+            type="password"
             className="mb-3"
             placeholder="Password"
             defaultValue={password}
-            onChange={(e) => setPassword(e.currentTarget.value)}
+            onChange={setPassword}
           />
 
-          <InputText
+          <TextField
+            type="password"
             className="mb-3"
             placeholder="Password Confirmation"
             defaultValue={passwordConfirmation}
-            onChange={(e) => setPasswordConfirmation(e.currentTarget.value)}
+            onChange={setPasswordConfirmation}
           />
 
           <Button className="mb-3" type="submit" fill onClick={handleSubmit}>
@@ -62,7 +63,7 @@ export const RegisterPage: React.FC = () => {
             <Link to="/login">Back</Link>
           </div>
         </form>
-      </div>
-    </div>
+      </AuthFormContainer>
+    </Page>
   );
 };

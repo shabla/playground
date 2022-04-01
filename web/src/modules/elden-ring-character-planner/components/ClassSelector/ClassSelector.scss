@@ -1,0 +1,13 @@
+.class-selector {
+  .class-option {
+    border: 1px solid var(--character-planner-border-color);
+
+    * {
+      cursor: pointer;
+    }
+
+    &.selected {
+      background-color: #eee;
+    }
+  }
+}

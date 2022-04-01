@@ -1,7 +1,7 @@
 import React from "react"
 
 import { Page } from "@/components";
-import { Section, SectionRow, SectionCell, SectionHeader } from "./Section";
+import { Section, SectionRow, SectionCell, SectionHeader } from "../components/Section";
 
 import akiBanner from "../assets/week1/aki-banner.jpg";
 import akiIcon from "../assets/icons/gen1/Aki_Rosenthal_-_Icon.webp";
@@ -10,11 +10,13 @@ import akiChibi from "../assets/week1/aki-chibi.png";
 import fubukiBanner from "../assets/week1/fubuki-banner.jpg";
 import fubukiIcon from "../assets/icons/gamers/Shirakami_Fubuki_-_Icon.webp";
 
-import "./HoloNews.scss";
+import "./HoloNewsPage.scss";
 
-export const HoloNews: React.FC = () => {
+// Ref: https://www.reddit.com/gallery/tr3g4o
+
+export const HoloNewsPage: React.FC = () => {
   return (
-    <Page title="Holo News" containerClassName="holo-news">
+    <Page title="Holo News" containerClassName="holo-news-page">
       <Section title="GEN 1">
         <SectionRow>
           <SectionCell>

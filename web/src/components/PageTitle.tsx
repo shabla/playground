@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
 
 export type PageTitleProps = {
-    title: string;
+  title: string;
 };
 
 export const PageTitle: React.FC<PageTitleProps> = ({ title }) => {
-    useEffect(() => {
-        document.title = `${title} · My Cool App`;
-    }, [title]);
+  useEffect(() => {
+    document.title = `${title} · My Cool App`;
+  }, [title]);
 
-    return null;
+  return null;
 };
-
-export default PageTitle;

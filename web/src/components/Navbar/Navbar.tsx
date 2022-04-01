@@ -1,37 +1,45 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { Button } from "@/components";
-import { apolloClient } from "@/apollo-setup";
-import { useLogoutMutation } from "@/generated/graphql";
+import appConfig, { NavbarLink } from "@/appConfig";
+import { Button, Row } from "@/components";
 
 import "./Navbar.scss"
 
 export const Navbar: React.FC = () => {
   const navigate = useNavigate();
-  const [logout] = useLogoutMutation();
 
-  const handleLogout = () => {
-    logout();
-    apolloClient.clearStore();
-    navigate("/login");
-  };
+  const generateElements = (items: NavbarLink[], side: string): React.ReactNode => {
+    return items.map((item, index) => {
+      if (item.element) {
+        return (
+          <React.Fragment key={`${side}-${index}`}>
+            {item.element}
+          </React.Fragment>
+        )
+      }
+
+      if (item.to) {
+        return (
+          <Button key={`${side}-${index}`} onClick={() => navigate(item.to as string)} disabled={item.disabled}>
+            {item.label}
+          </Button>
+        )
+      }
+
+      return null;
+    })
+  }
 
   return (
-    <div className="Navbar">
-      <div>
-        <Button onClick={() => navigate("/")}>Home</Button>
-        <Button onClick={() => navigate("/ecs")}>ECS</Button>
-        <Button onClick={() => navigate("/dialog")}>Dialog</Button>
-        <Button onClick={() => navigate("/atlas")}>Atlas</Button>
-        <Button onClick={() => navigate("/dice-roller")}>Dice Roller</Button>
-        <Button onClick={() => navigate("/holo-news")}>Holo News</Button>
-        <Button onClick={() => navigate("/showcase")}>Showcase</Button>
-      </div>
+    <Row className="navbar" align="space-between center">
+      <Row gap={8}>
+        {generateElements(appConfig.navbar.leftItems, 'left')}
+      </Row>
 
-      <div>
-        <Button onClick={handleLogout}>Logout</Button>
-      </div>
-    </div>
+      <Row gap={8}>
+        {generateElements(appConfig.navbar.rightItems, 'right')}
+      </Row>
+    </Row>
   );
 };

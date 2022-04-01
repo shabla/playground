@@ -1,0 +1,18 @@
+.character-planner {
+  --character-planner-border-color: #ccc;
+
+  .build-box {
+    border: 1px solid var(--character-planner-border-color);
+  }
+
+  .tooltip-target {
+    font-weight: bold;
+    color: var(--blue1);
+    cursor: help;
+  }
+
+  .user-defined {
+    border-color: var(--green1);
+    border-width: 2px;
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { InputText } from "@/components";
+import { TextField } from "@/components";
 import { GameSettings } from "../models";
 
 export interface HostSettingsProps {
@@ -28,18 +28,18 @@ export const HostSettings: React.FC<HostSettingsProps> = ({ onChange }) => {
     <div className="grid grid-cols-2 gap-4">
       <label htmlFor="success-input">Minimum Success Value</label>
 
-      <InputText
+      <TextField
         id="success-input"
         defaultValue={successValue.toString()}
-        onChange={(e) => setSuccessValue(parseInt(e.currentTarget.value))}
+        onChange={value => setSuccessValue(parseInt(value))}
       />
 
       <label htmlFor="dice-size-input">Dice Size</label>
 
-      <InputText
+      <TextField
         id="dice-size-input"
         defaultValue={diceSize.toString()}
-        onChange={(e) => setDiceSize(parseInt(e.currentTarget.value))}
+        onChange={value => setDiceSize(parseInt(value))}
       />
     </div>
   );

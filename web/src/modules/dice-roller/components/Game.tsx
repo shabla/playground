@@ -3,7 +3,7 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { Socket } from "socket.io-client";
 
-import { Button, Heading, InputText } from "@/components";
+import { Button, Heading, TextField } from "@/components";
 import { getRandomInt } from "@/utils/random";
 import { RollOutput } from "../models";
 import { RollHistory } from "../components/RollHistory";
@@ -138,10 +138,10 @@ export const Game: React.FC<GameProps> = ({ socket, playerSettings, gameSettings
             </div>
 
             <div className="flex-auto">
-              <InputText
+              <TextField
                 id="name-input"
                 defaultValue={playerSettings.name}
-                onChange={(e) => onChangeName(e.currentTarget.value)}
+                onChange={onChangeName}
               />
             </div>
           </div>
@@ -160,10 +160,10 @@ export const Game: React.FC<GameProps> = ({ socket, playerSettings, gameSettings
             </div>
 
             <div className="flex-none w-20">
-              <InputText
+              <TextField
                 id="nb-dices-input"
                 value={nbDices.toString()}
-                onChange={(e) => setNbDices(parseInt(e.currentTarget.value))}
+                onChange={value => setNbDices(parseInt(value))}
               />
             </div>
           </div>

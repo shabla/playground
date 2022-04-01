@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useLoginMutation } from "@/generated/graphql";
-import { Page, TextField, InputText, Button, Link } from "@/components";
+import { Page, TextField, Button, Link } from "@/components";
 import { setAccessToken } from "@/store";
-import { Logo } from "../../components/Logo";
-
-import "./LoginPage.scss"
+import { Logo } from "../components/Logo";
+import { AuthFormContainer } from "../components/AuthFormContainer";
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -31,10 +30,10 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <Page className="login-page" navbar={false} withContainer={false}>
+    <Page className="login-page" withContainer={false} align="center center">
       <Logo />
 
-      <div className="form-container">
+      <AuthFormContainer>
         <form noValidate onSubmit={handleSubmit}>
           <TextField
             placeholder="Email"
@@ -67,7 +66,7 @@ export const LoginPage: React.FC = () => {
             <Link to="/register">Register</Link>
           </div>
         </form>
-      </div>
+      </AuthFormContainer>
     </Page>
   );
 };
