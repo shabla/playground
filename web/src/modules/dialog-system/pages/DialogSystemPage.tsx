@@ -103,7 +103,7 @@ const QuestIcon = styled(Icon).attrs({
     }
 `;
 
-export const DialogViewerPage: React.FC = () => {
+export const DialogSystemPage: React.FC = () => {
   const [target, setTarget] = useState<Character | null>(null);
 
   const blackBarProps = useSpring({
@@ -145,4 +145,4 @@ export const DialogViewerPage: React.FC = () => {
   );
 };
 
-export default DialogViewerPage;
+export default DialogSystemPage;

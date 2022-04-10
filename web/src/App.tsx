@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import appConfig from "./appConfig";
-// import { DialogViewerPage } from "@/modules/dialog-system/pages/DialogViewerPage";
+import { routes as DialogSystemRoutes } from "@/modules/dialog-system";
 import { routes as DiceRollerRoutes } from "@/modules/dice-roller";
 import { routes as AtlasRoutes } from "@/modules/atlas";
 import { routes as ECSRoutes } from "@/modules/ecs";
@@ -35,15 +35,12 @@ export const App: React.FC = () => {
           {HoloNewsRoutes}
           {ECSRoutes}
           {DiceRollerRoutes}
+          {DialogSystemRoutes}
 
           {/* TODO: change this to redirect to login when logged out */}
           <Route path="*" element={<Navigate to={isLoggedIn() ? "/" : "/login"} />} />
         </Routes>
       )}
-
-      {/* 
-      <Route exact path="/dialog" component={DialogViewerPage} />
-      */}
     </div>
   );
 };
