@@ -1,9 +1,3 @@
-todo:
-- change spacing classes to have abstract levels isntead of pixels
-- add more font global classes
-
-
-
 # Formatting with prettier + eslint
 - Install VS Code extension `Prettier ESLint` and use it as formatter
 - Install devDependencies:

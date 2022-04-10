@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import { Page, Button } from "@/components";
-import ecs, { Position } from "@/ecs";
+import { Position } from "../components/Position";
+import ecs from "../EntityManager";
 
 interface ItemProps {
   entity: string;

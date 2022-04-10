@@ -1,4 +1,4 @@
-- remove tailwind
-- replace create-react-app with vite
-- use css vars for ui components
-- top level script to start everything in one command
+todo:
+- change spacing classes to have abstract levels isntead of pixels
+- add more font global classes
+

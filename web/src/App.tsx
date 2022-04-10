@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import appConfig from "./appConfig";
-// import { ECSPage } from "@/pages/ECSPage";
 // import { DiceRollerPage } from "@/modules/dice-roller";
 // import { DialogViewerPage } from "@/modules/dialog-system/pages/DialogViewerPage";
 import { routes as AtlasRoutes } from "@/modules/atlas";
+import { routes as ECSRoutes } from "@/modules/ecs";
 import { routes as HoloNewsRoutes } from "@/modules/holo-news"
 import { routes as UIShowcaseRoutes } from "@/modules/ui-showcase";
 import { routes as AuthModuleRoutes, TokenRefresher } from "@/modules/auth";
@@ -33,6 +33,7 @@ export const App: React.FC = () => {
           {UIShowcaseRoutes}
           {ERPlannerRoutes}
           {HoloNewsRoutes}
+          {ECSRoutes}
 
           {/* TODO: change this to redirect to login when logged out */}
           <Route path="*" element={<Navigate to={isLoggedIn() ? "/" : "/login"} />} />
@@ -40,7 +41,6 @@ export const App: React.FC = () => {
       )}
 
       {/* 
-      <Route exact path="/ecs" component={ECSPage} />
       <Route exact path="/dialog" component={DialogViewerPage} />
       <Route exact path="/dice-roller" component={DiceRollerPage} />
       */}
