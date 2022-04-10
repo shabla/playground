@@ -16,7 +16,7 @@ import "./HoloNewsPage.scss";
 
 export const HoloNewsPage: React.FC = () => {
   return (
-    <Page title="Holo News" containerClassName="holo-news-page">
+    <Page title="Holo News" className="holo-news-page">
       <Section title="GEN 1">
         <SectionRow>
           <SectionCell>

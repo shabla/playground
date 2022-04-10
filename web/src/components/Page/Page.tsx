@@ -10,33 +10,27 @@ export interface PageProps extends Partial<FlexContainerProps> {
   title?: string;
   withContainer?: boolean;
   className?: string;
-  containerClassName?: string;
 }
 
 export const Page: React.FC<PageProps> = ({
   title,
   withContainer = true,
-  containerClassName,
   className,
   children,
+  direction = "column",
   ...flexContainerProps
 }) => {
   return (
-    <>
-      <FlexContainer
-        className={classNames("page", { 'with-navbar': appConfig.showNavbar }, className)}
-        direction="column"
-        {...flexContainerProps}
-      >
-        {title && <PageTitle title={title} />}
-        {withContainer ? (
-          <div className={classNames("page__container", containerClassName)}>
-            {children}
-          </div>
-        ) : (
-          children
-        )}
-      </FlexContainer>
-    </>
+    <FlexContainer
+      className={classNames("page", {
+        'with-navbar': appConfig.showNavbar,
+        'page--container': withContainer,
+      }, className)}
+      direction={direction}
+      {...flexContainerProps}
+    >
+      {title && <PageTitle title={title} />}
+      {children}
+    </FlexContainer>
   );
 };

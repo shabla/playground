@@ -18,6 +18,7 @@ export const SideBar: React.FC<{ rootPath: string }> = ({ rootPath }) => {
       <NavLink style={style} to={`${rootPath}/button-group`}>Button Group</NavLink>
       <NavLink style={style} to={`${rootPath}/text-field`}>Text Field</NavLink>
       <NavLink style={style} to={`${rootPath}/form-text-field`}>Form Text Field</NavLink>
+      <NavLink style={style} to={`${rootPath}/checkbox`}>Checkbox</NavLink>
     </Column>
   );
 };

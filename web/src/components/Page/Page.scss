@@ -3,9 +3,13 @@
 
   &.with-navbar {
     padding-top: var(--navbar-height);
+
+    &.page--container {
+      padding-top: calc(var(--navbar-height) + 10px);
+    }
   }
 
-  &__container {
+  &--container {
     min-height: 100%;
     width: 1200px;
     margin: 0 auto;

@@ -67,7 +67,7 @@ export const DiceRollerPage: React.FC = () => {
   };
 
   return (
-    <Page title="Dice Roller" containerClassName="flex flex-col">
+    <Page title="Dice Roller" className="flex flex-col">
       <div className="flex flex-grow flex-col">
         {!gameSettings && (
           <ConnectionForm onCreateGame={onCreateGame} onJoinGame={onJoinGame} />

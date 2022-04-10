@@ -3,7 +3,11 @@ import { Route } from "react-router-dom"
 import appConfig, { ModuleConfig } from "@/appConfig"
 import { HoloNewsPage } from "./pages/HoloNewsPage"
 
-export const config: ModuleConfig = {
+interface HoloNewsModule extends ModuleConfig {
+  // specific module settings here
+}
+
+export const config: HoloNewsModule = {
   name: 'holo-news',
   path: 'holo-news',
 };

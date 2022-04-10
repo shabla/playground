@@ -36,14 +36,18 @@ export const FlexContainer: React.FC<FlexContainerProps> = ({
     let columnGap: React.CSSProperties['columnGap'];
 
     if (grow != null) {
-      flexGrow = typeof grow === 'boolean' ? 1 : grow;
+      flexGrow = typeof grow === 'boolean'
+        ? (grow ? 1 : 0)
+        : grow;
     } else {
       // set grow to 0 if basis is present and grow is not specified
       flexGrow = basis != null ? 0 : undefined;
     }
 
     if (shrink != null) {
-      flexShrink = typeof shrink === 'boolean' ? 1 : shrink;
+      flexShrink = typeof shrink === 'boolean'
+        ? (grow ? 1 : 0)
+        : shrink;
     } else {
       // set shrink to 0 if grow is not specified
       flexShrink = basis != null ? 0 : undefined;

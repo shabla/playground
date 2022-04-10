@@ -3,9 +3,9 @@ import { Routes, Route, Navigate } from "react-router-dom";
 
 import appConfig from "./appConfig";
 // import { ECSPage } from "@/pages/ECSPage";
-// import { AtlasPage } from "@/modules/atlas";
 // import { DiceRollerPage } from "@/modules/dice-roller";
 // import { DialogViewerPage } from "@/modules/dialog-system/pages/DialogViewerPage";
+import { routes as AtlasRoutes } from "@/modules/atlas";
 import { routes as HoloNewsRoutes } from "@/modules/holo-news"
 import { routes as UIShowcaseRoutes } from "@/modules/ui-showcase";
 import { routes as AuthModuleRoutes, TokenRefresher } from "@/modules/auth";
@@ -27,6 +27,7 @@ export const App: React.FC = () => {
 
       {!loading && (
         <Routes>
+          {AtlasRoutes}
           {AuthModuleRoutes}
           {HomeModuleRoutes}
           {UIShowcaseRoutes}
@@ -41,7 +42,6 @@ export const App: React.FC = () => {
       {/* 
       <Route exact path="/ecs" component={ECSPage} />
       <Route exact path="/dialog" component={DialogViewerPage} />
-      <Route exact path="/atlas" component={AtlasPage} />
       <Route exact path="/dice-roller" component={DiceRollerPage} />
       */}
     </div>

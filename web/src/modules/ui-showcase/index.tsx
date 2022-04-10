@@ -7,6 +7,7 @@ import { FlexContainerShowcase } from './components/FlexContainerShowcase';
 import { ButtonGroupShowcase } from './components/ButtonGroupShowcase';
 import { TextFieldShowcase } from './components/TextFieldShowcase';
 import { FormTextFieldShowcase } from './components/FormTextFieldShowcase';
+import { CheckboxExample } from './components/CheckboxExample';
 
 export const config: ModuleConfig = {
   name: 'showcase',
@@ -27,6 +28,7 @@ export const routes = (
     <Route path="text-field" element={<TextFieldShowcase />} />
     <Route path="button-group" element={<ButtonGroupShowcase />} />
     <Route path="form-text-field" element={<FormTextFieldShowcase />} />
+    <Route path="checkbox" element={<CheckboxExample />} />
     <Route path="*" element={<div>No matching showcase</div>} />
   </Route>
 );

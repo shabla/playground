@@ -1,0 +1,19 @@
+.atlas-page {
+  .step {
+    border: 1px solid green;
+    border-bottom: 0;
+
+    &:last-of-type {
+      border-bottom-width: 1px;
+    }
+
+    &.selected {
+      background: green;
+      color: white;
+    }
+  }
+
+  .total-col {
+    border-left: 1px solid green;
+  }
+}
