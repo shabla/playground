@@ -11,6 +11,7 @@ import { routes as UIShowcaseRoutes } from "@/modules/ui-showcase";
 import { routes as AuthModuleRoutes, TokenRefresher } from "@/modules/auth";
 import { routes as HomeModuleRoutes } from "@/modules/home";
 import { routes as ERPlannerRoutes } from "@/modules/elden-ring-character-planner";
+import { routes as YahtzeeRoutes } from "@/modules/yahtzee";
 import { isLoggedIn } from "@/store";
 import { Navbar } from "./components";
 
@@ -21,7 +22,7 @@ export const App: React.FC = () => {
 
   return (
     <div className="App">
-      {/* <TokenRefresher onLoaded={() => setLoading(false)} /> */}
+      <TokenRefresher onLoaded={() => setLoading(false)} />
 
       {appConfig.showNavbar && <Navbar />}
 
@@ -36,6 +37,7 @@ export const App: React.FC = () => {
           {ECSRoutes}
           {DiceRollerRoutes}
           {DialogSystemRoutes}
+          {YahtzeeRoutes}
 
           {/* TODO: change this to redirect to login when logged out */}
           <Route path="*" element={<Navigate to={isLoggedIn() ? "/" : "/login"} />} />

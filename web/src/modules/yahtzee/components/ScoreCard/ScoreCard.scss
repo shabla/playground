@@ -1,0 +1,47 @@
+table.score-card {
+  border: 1px solid black;
+  border-collapse: collapse;
+  border-radius: 3px;
+
+  .section {
+    height: 40px;
+    background-color: #ddd;
+
+    td {
+      padding: 0 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+
+  tbody {
+    tr {
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+    }
+
+    td {
+      height: 50px;
+      padding: 0 10px;
+
+      &.name {
+        background-color: #eee;
+        border-right: 1px solid black;
+        width: 150px;
+      }
+
+      &.score {
+        width: 80px;
+        pointer-events: all;
+        text-align: center;
+        font-weight: bold;
+        font-size: 22px;
+
+        &:hover {
+          background-color: #eee;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
