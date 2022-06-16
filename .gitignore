@@ -126,8 +126,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Web build folder
-web/build
+# Client build folder
+client/build
 
 # tailwind compiled css
-web/src/index.css
+client/src/index.css
