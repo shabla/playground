@@ -13,16 +13,16 @@ export const config: ModuleConfig = {
   }
 };
 
-appConfig.registerModule(config)
-appConfig.registerNavbarItem('right', {
-  element: <NavbarLogoutButton redirectPath={config.paths?.login} />
-})
-
-export const routes = (
-  <>
-    <Route path={config.paths?.login} element={< LoginPage />} />
-    <Route path={config.paths?.register} element={< RegisterPage />} />
-  </>
-)
-
 export { TokenRefresher } from "./components/TokenRefresher"
+
+export const init = (): void => {
+  appConfig.registerModule(config, (
+    <>
+      <Route path={config.paths?.login} element={< LoginPage />} />
+      <Route path={config.paths?.register} element={< RegisterPage />} />
+    </>
+  ))
+  appConfig.registerNavbarItem('right', {
+    element: <NavbarLogoutButton redirectPath={config.paths?.login} />
+  })
+}

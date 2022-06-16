@@ -8,9 +8,9 @@ export const config: ModuleConfig = {
   path: 'atlas',
 };
 
-appConfig.registerModule(config)
-appConfig.registerNavbarItem('left', { to: '/atlas', label: 'Atlas' });
-
-export const routes = (
-  <Route path={config.path} element={< AtlasPage />} />
-)
+export const init = (): void => {
+  appConfig.registerModule(config, (
+    <Route path={config.path} element={< AtlasPage />} />
+  ))
+  appConfig.registerNavbarItem('left', { to: '/atlas', label: 'Atlas' });
+}

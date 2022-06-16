@@ -8,12 +8,9 @@ export const config: ModuleConfig = {
   path: 'character-planner',
 };
 
-appConfig.registerModule(config)
-appConfig.registerNavbarItem('left', { to: '/character-planner', label: 'Character Planner' });
-
-export const routes = (
-  <Route
-    path={config.path}
-    element={<PlannerPage />}
-  />
-);
+export const init = (): void => {
+  appConfig.registerModule(config, (
+    <Route path={config.path} element={<PlannerPage />} />
+  ))
+  appConfig.registerNavbarItem('left', { to: '/character-planner', label: 'Character Planner' });
+}

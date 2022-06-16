@@ -12,9 +12,9 @@ export const config: DialogSystemModule = {
   path: 'dialog-system',
 };
 
-appConfig.registerModule(config)
-appConfig.registerNavbarItem('left', { to: '/dialog-system', label: 'Dialog System' });
-
-export const routes = (
-  <Route path={config.path} element={< DialogSystemPage />} />
-)
+export const init = (): void => {
+  appConfig.registerModule(config, (
+    <Route path={config.path} element={< DialogSystemPage />} />
+  ))
+  appConfig.registerNavbarItem('left', { to: '/dialog-system', label: 'Dialog System' });
+}

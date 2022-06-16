@@ -3,10 +3,10 @@ import { useEffect } from "react";
 import { setAccessToken } from "@/store";
 
 export interface TokenRefresherProps {
-  onLoaded: () => void;
+
 }
 
-export const TokenRefresher: React.FC<TokenRefresherProps> = ({ onLoaded }) => {
+export const TokenRefresher: React.FC<TokenRefresherProps> = ({ }) => {
   useEffect(() => {
     fetch("http://localhost:4444/refresh_token", {
       credentials: "include",
@@ -19,12 +19,12 @@ export const TokenRefresher: React.FC<TokenRefresherProps> = ({ onLoaded }) => {
         }
       })
       .catch((err) => {
-        console.error(err);
+        // console.error(err);
       })
       .finally(() => {
-        onLoaded();
+        // do something
       });
-  }, [onLoaded]);
+  }, []);
 
   return null;
 }

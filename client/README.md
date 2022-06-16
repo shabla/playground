@@ -1,3 +1,8 @@
+# TODO
+- include navbar items in module config
+- fix navbar items still being shown even if module is disabled
+- get app config from backend (as a prop of the app maybe)
+
 # Formatting with prettier + eslint
 - Install VS Code extension `Prettier ESLint` and use it as formatter
 - Install devDependencies:

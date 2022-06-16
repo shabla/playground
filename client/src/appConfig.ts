@@ -22,30 +22,53 @@ export interface ModuleConfig {
   showNavbar?: boolean;
   path?: string;
   paths?: Record<string, string>;
+  enabled?: boolean;
 }
 
 class AppConfig {
-  modules: AppConfigInput['modules'];
-  navbar: Required<AppConfigInput['navbar']>;
+  modules: AppConfigInput['modules'] = {};
+  navbar: Required<AppConfigInput['navbar']> = {
+    leftItems: [],
+    rightItems: []
+  };
+  routes: Record<string, React.ReactNode> = {};
 
   constructor() {
+    this.reset();
+  }
+
+  reset() {
     this.modules = {};
     this.navbar = {
       leftItems: [],
       rightItems: []
     };
+    this.routes = {};
   }
 
   get showNavbar(): boolean {
     return true
   }
 
+  get moduleRoutes(): { name: string, routes: React.ReactNode }[] {
+    return Object.keys(this.routes).map(moduleName => ({
+      name: moduleName,
+      routes: this.routes[moduleName],
+    }))
+  }
+
   getModule(name: string): ModuleConfig {
     return this.modules[name];
   }
 
-  registerModule(config: ModuleConfig) {
-    this.modules[config.name] = config;
+  registerModule(config: ModuleConfig, routes?: React.ReactNode) {
+    if (config.enabled === undefined || config.enabled === true) {
+      console.log(`Register "${config.name}" module.`);
+      this.modules[config.name] = config;
+      this.routes[config.name] = routes;
+    } else {
+      console.log(`Module "${config.name}" is disabled.`)
+    }
   }
 
   registerNavbarItem(side: 'left' | 'right', item: NavbarLink) {

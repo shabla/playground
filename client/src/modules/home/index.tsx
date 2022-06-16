@@ -5,13 +5,12 @@ import { HomePage } from "./pages/HomePage"
 
 export const config: ModuleConfig = {
   name: 'home',
-  showNavbar: false,
   path: '/',
 };
 
-appConfig.registerModule(config)
-appConfig.registerNavbarItem('left', { to: config.path, label: 'Home' });
-
-export const routes = (
-  <Route path={config.path} element={< HomePage />} />
-)
+export const init = (): void => {
+  appConfig.registerModule(config, (
+    <Route path={config.path} element={< HomePage />} />
+  ))
+  appConfig.registerNavbarItem('left', { to: config.path, label: 'Home' });
+}

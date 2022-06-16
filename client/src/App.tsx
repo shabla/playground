@@ -2,47 +2,45 @@ import React, { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import appConfig from "./appConfig";
-import { routes as DialogSystemRoutes } from "@/modules/dialog-system";
-import { routes as DiceRollerRoutes } from "@/modules/dice-roller";
-import { routes as AtlasRoutes } from "@/modules/atlas";
-import { routes as ECSRoutes } from "@/modules/ecs";
-import { routes as HoloNewsRoutes } from "@/modules/holo-news"
-import { routes as UIShowcaseRoutes } from "@/modules/ui-showcase";
-import { routes as AuthModuleRoutes, TokenRefresher } from "@/modules/auth";
-import { routes as HomeModuleRoutes } from "@/modules/home";
-import { routes as ERPlannerRoutes } from "@/modules/elden-ring-character-planner";
-import { routes as YahtzeeRoutes } from "@/modules/yahtzee";
+import { init as initDialogSystemModule } from "@/modules/dialog-system";
+import { init as initDiceRollerModule } from "@/modules/dice-roller";
+import { init as initAtlasModule } from "@/modules/atlas";
+import { init as initECSModule } from "@/modules/ecs";
+import { init as initUIShowcaseModule } from "@/modules/ui-showcase";
+import { init as initAuthModule, TokenRefresher } from "@/modules/auth";
+import { init as initHomeModule } from "@/modules/home";
+import { init as initERPlannerModule } from "@/modules/elden-ring-character-planner";
+import { init as initYahtzeeModule } from "@/modules/yahtzee";
 import { isLoggedIn } from "@/store";
 import { Navbar } from "./components";
 
 import "./App.scss"
 
-export const App: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+initAtlasModule();
+initAuthModule();
+initDialogSystemModule();
+initDiceRollerModule();
+initECSModule();
+initERPlannerModule();
+initHomeModule();
+initUIShowcaseModule();
+initYahtzeeModule();
 
+export const App: React.FC = () => {
   return (
     <div className="App">
-      <TokenRefresher onLoaded={() => setLoading(false)} />
+      <TokenRefresher />
 
       {appConfig.showNavbar && <Navbar />}
 
-      {!loading && (
-        <Routes>
-          {AtlasRoutes}
-          {AuthModuleRoutes}
-          {HomeModuleRoutes}
-          {UIShowcaseRoutes}
-          {ERPlannerRoutes}
-          {HoloNewsRoutes}
-          {ECSRoutes}
-          {DiceRollerRoutes}
-          {DialogSystemRoutes}
-          {YahtzeeRoutes}
+      <Routes>
+        {appConfig.moduleRoutes.map(obj => (
+          <React.Fragment key={obj.name}>{obj.routes}</React.Fragment>
+        ))}
 
-          {/* TODO: change this to redirect to login when logged out */}
-          <Route path="*" element={<Navigate to={isLoggedIn() ? "/" : "/login"} />} />
-        </Routes>
-      )}
+        {/* TODO: change this to redirect to login when logged out */}
+        <Route path="*" element={<Navigate to={isLoggedIn() ? "/" : "/login"} />} />
+      </Routes>
     </div>
   );
 };

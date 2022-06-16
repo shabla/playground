@@ -12,9 +12,9 @@ export const config: ECSModuleConfig = {
   path: 'ecs',
 };
 
-appConfig.registerModule(config)
-appConfig.registerNavbarItem('left', { to: '/ecs', label: 'ECS' });
-
-export const routes = (
-  <Route path={config.path} element={< ECSPage />} />
-)
+export const init = (): void => {
+  appConfig.registerModule(config, (
+    <Route path={config.path} element={< ECSPage />} />
+  ))
+  appConfig.registerNavbarItem('left', { to: '/ecs', label: 'ECS' });
+}

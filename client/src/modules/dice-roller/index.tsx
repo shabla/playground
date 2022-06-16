@@ -12,9 +12,9 @@ export const config: DiceRollerModule = {
   path: 'dice-roller',
 };
 
-appConfig.registerModule(config)
-appConfig.registerNavbarItem('left', { to: '/dice-roller', label: 'Dice Roller' });
-
-export const routes = (
-  <Route path={config.path} element={< DiceRollerPage />} />
-)
+export const init = (): void => {
+  appConfig.registerModule(config, (
+    <Route path={config.path} element={< DiceRollerPage />} />
+  ))
+  appConfig.registerNavbarItem('left', { to: '/dice-roller', label: 'Dice Roller' });
+}

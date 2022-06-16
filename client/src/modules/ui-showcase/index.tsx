@@ -14,21 +14,21 @@ export const config: ModuleConfig = {
   path: '/showcase',
 };
 
-appConfig.registerModule(config)
-appConfig.registerNavbarItem('left', { to: config.path, label: 'Showcase' })
-
-export const routes = (
-  <Route
-    path={config.path}
-    element={<Showcase />}
-  >
-    <Route index element={<Navigate to="button" />} />
-    <Route path="button" element={<ButtonExample />} />
-    <Route path="flex-container" element={<FlexContainerShowcase />} />
-    <Route path="text-field" element={<TextFieldShowcase />} />
-    <Route path="button-group" element={<ButtonGroupShowcase />} />
-    <Route path="form-text-field" element={<FormTextFieldShowcase />} />
-    <Route path="checkbox" element={<CheckboxExample />} />
-    <Route path="*" element={<div>No matching showcase</div>} />
-  </Route>
-);
+export const init = (): void => {
+  appConfig.registerModule(config, (
+    <Route
+      path={config.path}
+      element={<Showcase />}
+    >
+      <Route index element={<Navigate to="button" />} />
+      <Route path="button" element={<ButtonExample />} />
+      <Route path="flex-container" element={<FlexContainerShowcase />} />
+      <Route path="text-field" element={<TextFieldShowcase />} />
+      <Route path="button-group" element={<ButtonGroupShowcase />} />
+      <Route path="form-text-field" element={<FormTextFieldShowcase />} />
+      <Route path="checkbox" element={<CheckboxExample />} />
+      <Route path="*" element={<div>No matching showcase</div>} />
+    </Route>
+  ))
+  appConfig.registerNavbarItem('left', { to: config.path, label: 'Showcase' })
+}
