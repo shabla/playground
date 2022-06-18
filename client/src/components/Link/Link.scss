@@ -1,0 +1,8 @@
+a {
+  text-decoration: none;
+  color: blue;
+
+  &:visited {
+    color: blue;
+  }
+}

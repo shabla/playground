@@ -11,20 +11,24 @@ import { init as initAuthModule, TokenRefresher } from "@/modules/auth";
 import { init as initHomeModule } from "@/modules/home";
 import { init as initERPlannerModule } from "@/modules/elden-ring-character-planner";
 import { init as initYahtzeeModule } from "@/modules/yahtzee";
+import { init as initAuthorizationsModule } from "@/modules/authorizations";
 import { isLoggedIn } from "@/store";
 import { Navbar } from "./components";
 
 import "./App.scss"
 
+appConfig.reset();
+
+initHomeModule();
 initAtlasModule();
 initAuthModule();
 initDialogSystemModule();
 initDiceRollerModule();
 initECSModule();
 initERPlannerModule();
-initHomeModule();
 initUIShowcaseModule();
 initYahtzeeModule();
+initAuthorizationsModule();
 
 export const App: React.FC = () => {
   return (

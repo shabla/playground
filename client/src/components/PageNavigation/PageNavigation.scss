@@ -1,0 +1,36 @@
+.page-navigation {
+  $border-size: 3px;
+  $height: 45px;
+  $bg-color: #eee;
+  $border-color: #cacaca;
+  $border-selected-color: blue;
+  $link-bg-color: transparent;
+  $link-hover-bg-color: #ccc;
+
+  background: $bg-color;
+  border-bottom: $border-size solid $border-color;
+
+  &--item {
+    height: $height;
+    line-height: $height;
+    padding: 0 25px;
+    margin-bottom: -$border-size;
+    background-color: $link-bg-color;
+    border-right: 1px solid $border-color;
+    color: black;
+
+    &:hover {
+      background: $link-hover-bg-color;
+      cursor: pointer;
+    }
+
+    &.selected {
+      border-bottom: $border-size solid $border-selected-color;
+      font-weight: bold;
+    }
+  }
+
+  >* {
+    border-right: 0;
+  }
+}

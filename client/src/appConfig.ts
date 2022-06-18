@@ -63,11 +63,11 @@ class AppConfig {
 
   registerModule(config: ModuleConfig, routes?: React.ReactNode) {
     if (config.enabled === undefined || config.enabled === true) {
-      console.log(`Register "${config.name}" module.`);
+      // console.log(`Register "${config.name}" module.`);
       this.modules[config.name] = config;
       this.routes[config.name] = routes;
     } else {
-      console.log(`Module "${config.name}" is disabled.`)
+      // console.log(`Module "${config.name}" is disabled.`)
     }
   }
 

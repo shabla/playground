@@ -18,8 +18,8 @@ export { TokenRefresher } from "./components/TokenRefresher"
 export const init = (): void => {
   appConfig.registerModule(config, (
     <>
-      <Route path={config.paths?.login} element={< LoginPage />} />
-      <Route path={config.paths?.register} element={< RegisterPage />} />
+      <Route path={config.paths?.login} element={<LoginPage />} />
+      <Route path={config.paths?.register} element={<RegisterPage />} />
     </>
   ))
   appConfig.registerNavbarItem('right', {
