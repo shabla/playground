@@ -8,8 +8,11 @@ export interface AuthModuleConfig extends ModuleConfig {
 }
 
 export const config: AuthModuleConfig = {
-  name: 'auth',
-  path: 'auth'
+  name: 'authorizations',
+  path: '/authorizations',
+  navbar: [
+    { to: '/authorizations', label: 'Auth', side: 'left' }
+  ]
 };
 
 export const init = (): void => {
@@ -18,5 +21,4 @@ export const init = (): void => {
       <Route path={`${config.path}`} element={< SummaryPage />} />
     </>
   ))
-  appConfig.registerNavbarItem('left', { to: config.path, label: 'Auth' });
 }

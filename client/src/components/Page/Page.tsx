@@ -1,8 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-import appConfig from "@/appConfig";
-import { PageTitle, FlexContainer, FlexContainerProps, Column } from "@/components";
+import { PageTitle, FlexContainer, FlexContainerProps, Column, Navbar } from "@/components";
 
 import "./Page.scss"
 
@@ -13,33 +12,41 @@ export interface PageProps extends Partial<FlexContainerProps> {
   noPadding?: boolean;
   header?: React.ReactNode;
   navigation?: React.ReactNode;
+  showNavbar?: boolean;
+  pageContentContainerProps?: Partial<FlexContainerProps>;
 }
 
 export const Page: React.FC<PageProps> = ({
   title,
   withContainer = true,
+  showNavbar = true,
   className,
   children,
   direction = "column",
   noPadding,
   header,
   navigation,
+  pageContentContainerProps,
   ...flexContainerProps
 }) => {
+  const { className: pageContentContainerClassName, ...pageContentContainerPropsRest } = pageContentContainerProps || {};
+
   return (
     <FlexContainer
       direction={direction}
-      className={classNames("page", {
-        'with-navbar': appConfig.showNavbar,
-      }, className)}
+      className={classNames("page", { 'with-navbar': showNavbar, }, className)}
       {...flexContainerProps}
     >
+      {showNavbar && <Navbar />}
       {title && <PageTitle title={title} />}
       {header}
       {navigation}
-      <Column className={classNames("page--content", {
-        'p-10': !noPadding
-      })}>
+      <Column
+        className={classNames("page--content", {
+          'p-10': !noPadding
+        }, pageContentContainerClassName)}
+        {...pageContentContainerPropsRest}
+      >
         {withContainer ? (
           <Column className="container">
             {children}

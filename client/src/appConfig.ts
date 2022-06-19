@@ -1,19 +1,8 @@
-interface AppConfigInput {
-  navbar: NavbarConfig;
-  modules: Record<string, ModuleConfig>;
-}
-
-// TODO: hard code module names here, allow customizing default module
-
-interface NavbarConfig {
-  leftItems?: NavbarLink[]
-  rightItems?: NavbarLink[]
-}
-
 export interface NavbarLink {
   to?: string;
   label?: string;
   disabled?: boolean;
+  side?: 'left' | 'right',
   element?: React.ReactNode;
 }
 
@@ -23,14 +12,11 @@ export interface ModuleConfig {
   path?: string;
   paths?: Record<string, string>;
   enabled?: boolean;
+  navbar?: NavbarLink[];
 }
 
 class AppConfig {
-  modules: AppConfigInput['modules'] = {};
-  navbar: Required<AppConfigInput['navbar']> = {
-    leftItems: [],
-    rightItems: []
-  };
+  modules: Record<string, ModuleConfig> = {};
   routes: Record<string, React.ReactNode> = {};
 
   constructor() {
@@ -39,15 +25,18 @@ class AppConfig {
 
   reset() {
     this.modules = {};
-    this.navbar = {
-      leftItems: [],
-      rightItems: []
-    };
     this.routes = {};
   }
 
-  get showNavbar(): boolean {
-    return true
+  getNavbarItems(side?: 'left' | 'right'): NavbarLink[] {
+    return Object.keys(this.modules)
+      .reduce((acc, moduleName) => {
+        const items = this.modules[moduleName].navbar
+        if (items) {
+          return [...acc, ...items.filter(item => side === undefined || item.side === side)];
+        }
+        return acc;
+      }, [] as NavbarLink[])
   }
 
   get moduleRoutes(): { name: string, routes: React.ReactNode }[] {
@@ -62,6 +51,10 @@ class AppConfig {
   }
 
   registerModule(config: ModuleConfig, routes?: React.ReactNode) {
+    if (this.modules[config.name]) {
+      console.warn(`Module "${config.name}" already registerd`);
+    }
+
     if (config.enabled === undefined || config.enabled === true) {
       // console.log(`Register "${config.name}" module.`);
       this.modules[config.name] = config;
@@ -69,20 +62,6 @@ class AppConfig {
     } else {
       // console.log(`Module "${config.name}" is disabled.`)
     }
-  }
-
-  registerNavbarItem(side: 'left' | 'right', item: NavbarLink) {
-    let items;
-
-    if (side === 'left') {
-      items = this.navbar.leftItems;
-    } else if (side === 'right') {
-      items = this.navbar.rightItems;
-    } else {
-      throw new Error(`Invalid side: "${side}"`);
-    }
-
-    items.push(item);
   }
 }
 

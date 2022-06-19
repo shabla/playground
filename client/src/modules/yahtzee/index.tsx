@@ -6,12 +6,14 @@ import { YahtzeePage } from "./pages/YahtzeePage"
 export const config: ModuleConfig = {
   name: 'yahtzee',
   path: '/yahtzee',
-  enabled: false
+  enabled: false,
+  navbar: [
+    { to: '/yahtzee', label: 'Yahtzee', side: 'left' }
+  ]
 };
 
 export const init = (): void => {
   appConfig.registerModule(config, (
     <Route path={config.path} element={< YahtzeePage />} />
   ))
-  appConfig.registerNavbarItem('left', { to: config.path, label: 'Yahtzee' });
 }

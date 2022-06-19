@@ -10,11 +10,13 @@ interface DiceRollerModule extends ModuleConfig {
 export const config: DiceRollerModule = {
   name: 'dice-roller',
   path: 'dice-roller',
+  navbar: [
+    { to: '/dice-roller', label: 'Dice Roller', side: 'left' }
+  ]
 };
 
 export const init = (): void => {
   appConfig.registerModule(config, (
     <Route path={config.path} element={< DiceRollerPage />} />
   ))
-  appConfig.registerNavbarItem('left', { to: '/dice-roller', label: 'Dice Roller' });
 }

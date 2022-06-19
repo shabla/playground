@@ -10,7 +10,13 @@ export const config: ModuleConfig = {
   paths: {
     login: '/login',
     register: '/register'
-  }
+  },
+  navbar: [
+    {
+      side: 'right',
+      element: <NavbarLogoutButton redirectPath='/login' />
+    }
+  ]
 };
 
 export { TokenRefresher } from "./components/TokenRefresher"
@@ -22,7 +28,4 @@ export const init = (): void => {
       <Route path={config.paths?.register} element={<RegisterPage />} />
     </>
   ))
-  appConfig.registerNavbarItem('right', {
-    element: <NavbarLogoutButton redirectPath={config.paths?.login} />
-  })
 }

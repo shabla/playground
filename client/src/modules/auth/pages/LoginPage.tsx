@@ -30,7 +30,7 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <Page className="login-page" withContainer={false} align="center center">
+    <Page className="login-page" withContainer={false} showNavbar={false} pageContentContainerProps={{ align: 'center center' }}>
       <Logo />
 
       <AuthFormContainer>
@@ -60,7 +60,9 @@ export const LoginPage: React.FC = () => {
             Login
           </Button>
 
-          <pre>{error && error.message}</pre>
+          {error && (
+            <pre>{error.message}</pre>
+          )}
 
           <div className="text-right">
             <Link to="/register">Register</Link>

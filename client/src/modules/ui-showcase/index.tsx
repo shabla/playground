@@ -12,6 +12,9 @@ import { CheckboxExample } from './components/CheckboxExample';
 export const config: ModuleConfig = {
   name: 'showcase',
   path: '/showcase',
+  navbar: [
+    { to: '/showcase', label: 'Showcase', side: 'left' }
+  ]
 };
 
 export const init = (): void => {
@@ -30,5 +33,4 @@ export const init = (): void => {
       <Route path="*" element={<div>No matching showcase</div>} />
     </Route>
   ))
-  appConfig.registerNavbarItem('left', { to: config.path, label: 'Showcase' })
 }

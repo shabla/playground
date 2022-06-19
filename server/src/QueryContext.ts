@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { TokenPayload } from "./jwt";
+import { TokenPayload } from "./tokens";
 
 export interface QueryContext {
-    req: Request;
-    res: Response;
-    payload?: TokenPayload;
+  req: Request;
+  res: Response;
+  payload?: TokenPayload;
 }

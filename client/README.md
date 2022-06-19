@@ -1,9 +1,9 @@
 # TODO
 - include navbar items in module config
-- fix navbar items still being shown even if module is disabled
 - get app config from backend (as a prop of the app maybe)
 - Rename module config path to root
 - Create module specific interfaces for having autocomplete on paths
+- content container component
 
 # Formatting with prettier + eslint
 - Install VS Code extension `Prettier ESLint` and use it as formatter

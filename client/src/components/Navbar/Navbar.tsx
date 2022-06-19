@@ -34,11 +34,11 @@ export const Navbar: React.FC = () => {
   return (
     <Row className="navbar" align="space-between center">
       <Row gap={8}>
-        {generateElements(appConfig.navbar.leftItems, 'left')}
+        {generateElements(appConfig.getNavbarItems('left'), 'left')}
       </Row>
 
       <Row gap={8}>
-        {generateElements(appConfig.navbar.rightItems, 'right')}
+        {generateElements(appConfig.getNavbarItems('right'), 'right')}
       </Row>
     </Row>
   );

@@ -13,15 +13,14 @@ import { init as initERPlannerModule } from "@/modules/elden-ring-character-plan
 import { init as initYahtzeeModule } from "@/modules/yahtzee";
 import { init as initAuthorizationsModule } from "@/modules/authorizations";
 import { isLoggedIn } from "@/store";
-import { Navbar } from "./components";
 
 import "./App.scss"
 
 appConfig.reset();
 
+initAuthModule();
 initHomeModule();
 initAtlasModule();
-initAuthModule();
 initDialogSystemModule();
 initDiceRollerModule();
 initECSModule();
@@ -34,8 +33,6 @@ export const App: React.FC = () => {
   return (
     <div className="App">
       <TokenRefresher />
-
-      {appConfig.showNavbar && <Navbar />}
 
       <Routes>
         {appConfig.moduleRoutes.map(obj => (
