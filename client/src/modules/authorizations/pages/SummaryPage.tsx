@@ -92,12 +92,13 @@ export const SummaryPage: React.FC = () => {
         ]} />
       )}
     >
-      <TextField onChange={setFilter} placeholder="Filter" />
+
 
       <Table
         className="mt-10"
         data={data}
         columns={columns}
+        tableHeader={<TextField onChange={setFilter} placeholder="Filter" />}
         filterFn={row => row.name.toLocaleLowerCase().includes(filter?.toLocaleLowerCase())}
       />
     </Page>

@@ -12,5 +12,6 @@ export * from './ButtonGroup/ButtonGroup';
 export * from './FormTextField/FormTextField';
 export * from './PageNavigation/PageNavigation';
 export * from './Table/Table';
+export * from './Table/models/TableColumn';
 export * from './Pagination/Pagination';
 export * from './ItemsPerPage/ItemsPerPage';

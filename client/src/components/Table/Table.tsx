@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Column, Row, Pagination, ItemsPerPage } from "@/components";
+import { TableColumn } from "./models/TableColumn";
 
 import "./Table.scss";
 
@@ -12,18 +13,11 @@ export interface TableProps<T> {
   className?: string;
   data: T[];
   columns: TableColumn<T>[];
+  tableHeader?: React.ReactNode;
   rowKey?: string | ((row: T) => string);
   defaultSortColumnIndex?: number;
   defaultSortDirection?: SortDirection;
   filterFn?: (row: T) => boolean;
-}
-
-export interface TableColumn<T> {
-  key?: string;
-  label?: string;
-  sortable?: boolean;
-  sortFn?: (a: any, b: any) => number;
-  data?: (row: T) => any;
 }
 
 export const Table = <T extends {} = any>({
@@ -31,6 +25,7 @@ export const Table = <T extends {} = any>({
   data = [],
   columns = [],
   rowKey,
+  tableHeader,
   defaultSortColumnIndex,
   defaultSortDirection,
   filterFn,
@@ -41,7 +36,7 @@ export const Table = <T extends {} = any>({
       defaultSortColumnIndex != null && defaultSortColumnIndex < columns?.length ? 'asc' : undefined
     )
   );
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPageIndex, setCurrentPageIndex] = useState<number>(3);
   const [itemsPerPage, setItemsPerPage] = useState<number>(2);
   const [displayedRows, setDisplayedRows] = useState<T[]>([]);
 
@@ -80,14 +75,14 @@ export const Table = <T extends {} = any>({
     }
 
     // Pagination
-    rows = rows.slice(currentPage * itemsPerPage, currentPage * itemsPerPage + itemsPerPage);
+    rows = rows.slice(currentPageIndex * itemsPerPage, currentPageIndex * itemsPerPage + itemsPerPage);
 
     setDisplayedRows(rows);
-  }, [data, columns, sortColumnIndex, sortDirection, itemsPerPage, currentPage]);
+  }, [data, columns, sortColumnIndex, sortDirection, itemsPerPage, currentPageIndex]);
 
   return (
     <Column className={classNames("table-container", className)}>
-
+      {tableHeader && <div className="table-header">{tableHeader}</div>}
       <div className="table-content">
         <table className="table">
           <thead>
@@ -144,7 +139,7 @@ export const Table = <T extends {} = any>({
         </table>
       </div>
 
-      <Row align="space-between end" className="mt-10">
+      <Row align="space-between end" className="table-footer">
         <ItemsPerPage
           value={itemsPerPage}
           items={[2, 5, 10, 50]}
@@ -152,10 +147,11 @@ export const Table = <T extends {} = any>({
         />
 
         <Pagination
-          currentPage={currentPage}
+          currentPage={currentPageIndex}
           totalItems={data.length}
+          totalPages={Math.ceil(data.length / itemsPerPage)}
           itemsPerPage={itemsPerPage}
-          onSetPage={setCurrentPage}
+          onSetPage={setCurrentPageIndex}
         />
       </Row>
     </Column>

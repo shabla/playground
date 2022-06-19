@@ -16,7 +16,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   children
 }) => {
   return (
-    <Column className="page-header">
+    <Column className="page-header p-10">
       {custom ? custom : (
         <Column className="container" align="center start">
           <Heading>{heading}</Heading>

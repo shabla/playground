@@ -3,10 +3,20 @@
 
   flex: 1 1 auto;
   width: 100%;
+  padding-bottom: 5px;
+
+  .table-header {
+    padding: 5px;
+    background: #fafafa;
+  }
 
   .table-content {
     flex: 1 1 auto;
     border: 1px solid $border-color;
+  }
+
+  .table-footer {
+    padding: 10px 0;
   }
 }
 

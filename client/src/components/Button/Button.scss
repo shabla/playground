@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 
   // Intents
   background-color: var(--button-background-color);

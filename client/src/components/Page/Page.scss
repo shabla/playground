@@ -11,7 +11,8 @@
 }
 
 .container {
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   flex: 1 1 auto;
   margin: 0 auto;
 }
