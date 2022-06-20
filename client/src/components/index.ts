@@ -16,3 +16,4 @@ export * from './Table/models/TableColumn';
 export * from './Pagination/Pagination';
 export * from './ItemsPerPage/ItemsPerPage';
 export * from './Dialog/Dialog';
+export * from './Select/Select';

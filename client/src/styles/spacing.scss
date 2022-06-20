@@ -1,5 +1,13 @@
 $baseDistance: 5;
-$distances: (0, 1, $baseDistance, $baseDistance*2, $baseDistance*3, $baseDistance*4, $baseDistance*5);
+$distances: (0,
+  1,
+  $baseDistance,
+  $baseDistance*2,
+  $baseDistance*3,
+  $baseDistance*4,
+  $baseDistance*5,
+  $baseDistance*6,
+);
 $directions: ("": (m: "margin", p: "padding"),
   "l": (m: "margin-left", p: "padding-left"),
   "r": (m: "margin-right", p: "padding-right"),

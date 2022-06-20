@@ -6,7 +6,7 @@
   font-weight: 500;
   box-sizing: border-box;
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
@@ -58,19 +58,19 @@
 
   &.size-xs {
     --button-height: var(--input-height-xs);
-    --button-font-size: 11px;
+    --button-font-size: 10px;
     --button-x-padding: 4px;
   }
 
   &.size-sm {
     --button-height: var(--input-height-sm);
-    --button-font-size: 12px;
+    --button-font-size: 11px;
     --button-x-padding: 8px;
   }
 
   &.size-md {
     --button-height: var(--input-height-md);
-    --button-font-size: 14px;
+    --button-font-size: 13px;
     --button-x-padding: 12px;
   }
 

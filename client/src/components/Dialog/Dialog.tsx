@@ -1,14 +1,16 @@
 import React from "react";
 import { Dialog as HeadlessDialog, Transition } from "@headlessui/react";
 
-import { Heading, Row, Button } from "@/components";
+import { Heading, Row, Button, ButtonProps } from "@/components";
 
 import "./Dialog.scss"
 
 export interface DialogProps {
   isOpen: boolean;
   title: string;
+  data: any;
   close: () => void;
+  actions?: ButtonProps[];
   children?: React.ReactNode
 }
 
@@ -16,6 +18,8 @@ export interface DialogProps {
 export const Dialog: React.FC<DialogProps> = ({
   isOpen,
   title,
+  data,
+  actions,
   close,
   children,
 }) => {
@@ -32,33 +36,28 @@ export const Dialog: React.FC<DialogProps> = ({
       <HeadlessDialog onClose={close} className="dialog">
         <div className="dialog__backdrop" aria-hidden="true" />
 
-        <HeadlessDialog.Panel className="dialog__content">
-          HELLO WORLD
-          <Button>asd</Button>
-        </HeadlessDialog.Panel>
-      </HeadlessDialog>
-      {/* <HeadlessDialog onClose={close} className="dialog">
-        <div className="dialog__backdrop" aria-hidden="true" />
-
         <div className="dialog__content-container">
           <HeadlessDialog.Panel className="dialog__content">
-            <Row align="space-between center" className="dialog__header p-10">
+            <Row align="space-between center" className="dialog__header p-15">
               <Heading tag="h2" className="m-0">{title}</Heading>
 
               <Button icon="multiply" simple onClick={close} />
             </Row>
 
-            <main className="dialog__main px-10">
+            <main className="dialog__main p-25">
               {children}
             </main>
 
-            <Row align="end center" gap={10} className="dialog__footer p-10">
-              <Button>Action 1</Button>
-              <Button>Action 2</Button>
-            </Row>
+            {actions && (
+              <Row align="end center" gap={10} className="dialog__footer p-10">
+                {actions.map(({ key, ...buttonProps }, index) => (
+                  <Button key={key || index} {...buttonProps} />
+                ))}
+              </Row>
+            )}
           </HeadlessDialog.Panel>
         </div>
-      </HeadlessDialog> */}
+      </HeadlessDialog>
     </Transition>
   )
 }

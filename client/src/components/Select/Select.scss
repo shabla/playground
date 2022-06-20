@@ -1,0 +1,11 @@
+.select {
+  border-color: var(--input-border-color);
+  height: var(--input-height-md);
+  min-width: 30px;
+  border-radius: var(--input-border-radius);
+  padding: 0 5px;
+
+  &:focus {
+    border-color: var(--input-border-color);
+  }
+}

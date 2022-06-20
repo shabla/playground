@@ -1,18 +1,38 @@
 .table-container {
-  $border-color: #cacaca;
-
   flex: 1 1 auto;
   width: 100%;
   padding-bottom: 5px;
-
-  .table-header {
-    padding: 5px;
-    background: #fafafa;
-  }
+  position: relative;
 
   .table-content {
-    flex: 1 1 auto;
-    border: 1px solid $border-color;
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--input-border-radius);
+    background-color: var(--table-bg-color);
+    position: relative;
+
+    .table__empty {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--ink-muted);
+    }
+
+    .table__loading-spinner {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(255, 255, 255, 0.8);
+
+      >svg {
+        height: 32px;
+        width: 32px;
+        color: var(--ink-muted);
+        animation: spin;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+      }
+    }
   }
 
   .table-footer {
@@ -21,20 +41,18 @@
 }
 
 .table {
-  $border-color: #cacaca;
-  $header-x-padding: 10px;
+  $header-x-padding: 12px;
   $header-y-padding: 10px;
   $cell-x-padding: $header-x-padding;
-  $cell-y-padding: 5px;
   $icon-size: 14px;
   $alternating-row-bg-color: rgba(100, 100, 100, 0.05);
-
+  $row-height: 40px;
 
   border-collapse: collapse;
   width: 100%;
 
   thead {
-    border-bottom: 2px solid $border-color;
+    border-bottom: 1px solid var(--input-border-color);
     background-color: rgba(100, 100, 100, 0.10);
 
     th {
@@ -62,7 +80,7 @@
 
         .svg-inline--fa {
           position: absolute;
-          right: $cell-x-padding / 2;
+          right: calc($cell-x-padding / 2);
           height: $icon-size;
           width: $icon-size;
         }
@@ -72,7 +90,7 @@
 
   tbody {
     tr {
-      border-bottom: 1px solid $border-color;
+      border-bottom: 1px solid var(--input-border-color);
 
       &:nth-of-type(even) {
         background-color: $alternating-row-bg-color;
@@ -81,8 +99,23 @@
       td {
         font-size: 14px;
         line-height: 16px;
-        padding: $cell-y-padding $cell-x-padding;
+        padding: 5px $cell-x-padding;
+        vertical-align: middle;
+        height: $row-height;
+
+        &.reduce-padding {
+          padding: 1px 2px;
+        }
+      }
+
+      &:last-of-type {
+        border-bottom: 0;
       }
     }
+  }
+
+  .fit-width-to-content {
+    width: 1%;
+    white-space: nowrap;
   }
 }

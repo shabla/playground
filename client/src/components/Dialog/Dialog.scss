@@ -1,9 +1,9 @@
 .dialog {
   display: relative;
-  z-index: 50;
 
   &__backdrop {
     position: fixed;
+    z-index: 45;
     top: 0;
     bottom: 0;
     right: 0;
@@ -12,6 +12,7 @@
   }
 
   &__content-container {
+    z-index: 50;
     display: flex;
     position: fixed;
     justify-content: center;
@@ -25,8 +26,8 @@
   &__content {
     background-color: white;
     border-radius: 6px;
-    max-width: 600px;
-    min-width: 300px;
+    max-width: 95%;
+    min-width: 420px;
   }
 
   &__header {
@@ -35,7 +36,9 @@
 
   &__main {}
 
-  &__footer {}
+  &__footer {
+    border-top: 1px solid var(--input-border-color);
+  }
 }
 
 .dialog-enter {

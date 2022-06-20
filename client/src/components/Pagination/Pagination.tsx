@@ -11,7 +11,7 @@ export interface PaginationProps {
   totalItems: number;
   totalPages: number;
   maxDynamicPages?: number;
-  onSetPage: (page: number) => void;
+  onPageChange: (page: number) => void;
 }
 
 export const Pagination: React.FC<PaginationProps> = ({
@@ -20,17 +20,17 @@ export const Pagination: React.FC<PaginationProps> = ({
   totalItems,
   totalPages,
   maxDynamicPages = 3,
-  onSetPage,
+  onPageChange,
 }) => {
   const handlePrevious = () => {
     if (currentPage > 0) {
-      onSetPage(currentPage - 1);
+      onPageChange(currentPage - 1);
     }
   }
 
   const handleNext = () => {
     if (currentPage < totalPages) {
-      onSetPage(currentPage + 1);
+      onPageChange(currentPage + 1);
     }
   }
 
@@ -40,7 +40,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       key={1}
       intent={currentPage === 0 ? "primary" : undefined}
       simple={currentPage !== 0}
-      onClick={() => onSetPage(0)}
+      onClick={() => onPageChange(0)}
     >
       1
     </Button>
@@ -63,7 +63,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             key={i + 1}
             intent={currentPage === i ? "primary" : undefined}
             simple={currentPage !== i}
-            onClick={() => onSetPage(i)}
+            onClick={() => onPageChange(i)}
           >
             {i + 1}
           </Button>
@@ -94,7 +94,7 @@ export const Pagination: React.FC<PaginationProps> = ({
             key={page + 1}
             intent={currentPage === page ? "primary" : undefined}
             simple={currentPage !== page}
-            onClick={() => onSetPage(page)}
+            onClick={() => onPageChange(page)}
           >
             {page + 1}
           </Button>
@@ -118,7 +118,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         key={totalPages}
         intent={currentPage === lastPageIndex ? "primary" : undefined}
         simple={currentPage !== lastPageIndex}
-        onClick={() => onSetPage(lastPageIndex)}
+        onClick={() => onPageChange(lastPageIndex)}
       >
         {totalPages}
       </Button>

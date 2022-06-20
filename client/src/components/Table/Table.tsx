@@ -13,8 +13,9 @@ export interface TableProps<T> {
   className?: string;
   data: T[];
   columns: TableColumn<T>[];
-  tableHeader?: React.ReactNode;
+  loading?: boolean;
   rowKey?: string | ((row: T) => string);
+  itemsPerPageOptions?: number[];
   defaultSortColumnIndex?: number;
   defaultSortDirection?: SortDirection;
   filterFn?: (row: T) => boolean;
@@ -25,7 +26,8 @@ export const Table = <T extends {} = any>({
   data = [],
   columns = [],
   rowKey,
-  tableHeader,
+  loading,
+  itemsPerPageOptions = [2, 5, 10, 25, 50],
   defaultSortColumnIndex,
   defaultSortDirection,
   filterFn,
@@ -80,13 +82,15 @@ export const Table = <T extends {} = any>({
     setDisplayedRows(rows);
   }, [data, columns, sortColumnIndex, sortDirection, itemsPerPage, currentPageIndex]);
 
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const rowHeight = 40;
+
   return (
     <Column className={classNames("table-container", className)}>
-      {tableHeader && <div className="table-header">{tableHeader}</div>}
-      <div className="table-content">
+      <Column className="table-content" style={{ height: `${itemsPerPage * rowHeight + rowHeight}px` }}>
         <table className="table">
           <thead>
-            <tr>
+            <tr style={{ height: `${rowHeight}px` }}>
               {columns.map((column, colIndex) => {
                 const isSortedColumn = sortColumnIndex === colIndex;
                 const isSortedAsc = sortDirection === 'asc';
@@ -96,7 +100,8 @@ export const Table = <T extends {} = any>({
                   <th
                     key={colIndex}
                     className={classNames({
-                      sortable: column.sortable === true
+                      sortable: column.sortable === true,
+                      'fit-width-to-content': column.fitWidthToContent,
                     })}
                     onClick={column.sortable ? () => {
                       const isNewSortColumn = colIndex !== sortColumnIndex;
@@ -123,13 +128,24 @@ export const Table = <T extends {} = any>({
 
           <tbody>
             {displayedRows.map((row: any, rowIndex) => {
-              const key = typeof rowKey === 'string' ? row?.[rowKey] : rowKey?.(row);
+              const key = typeof rowKey === 'string' ? row?.[rowKey] : rowKey?.(row) || rowIndex;
 
               return (
-                <tr key={key}>
+                <tr key={key} style={{ height: `${rowHeight}px` }}>
                   {columns.map((column, colIndex) => {
+                    const value = column.data?.(row);
+                    const node = column.cellRenderer?.(row, value) || value;
+
                     return (
-                      <td key={colIndex}>{column.data?.(row)}</td>
+                      <td
+                        key={colIndex}
+                        className={classNames({
+                          'fit-width-to-content': column.fitWidthToContent,
+                          'reduce-padding': column.reducePadding,
+                        })}
+                      >
+                        {node}
+                      </td>
                     )
                   })}
                 </tr>
@@ -137,22 +153,40 @@ export const Table = <T extends {} = any>({
             })}
           </tbody>
         </table>
-      </div>
+
+        {loading && (
+          <Column className="table__loading-spinner" grow={1} align="center center">
+            <FontAwesomeIcon icon="spinner" />
+          </Column>
+        )}
+
+        {!loading && displayedRows.length === 0 && (
+          <Column className="table__empty" align="center center" grow={1}>
+            No items
+          </Column>
+        )}
+      </Column>
 
       <Row align="space-between end" className="table-footer">
         <ItemsPerPage
           value={itemsPerPage}
-          items={[2, 5, 10, 50]}
-          onChange={setItemsPerPage}
+          items={itemsPerPageOptions}
+          disabled={loading}
+          onChange={value => {
+            setItemsPerPage(value);
+            setCurrentPageIndex(0);
+          }}
         />
 
-        <Pagination
-          currentPage={currentPageIndex}
-          totalItems={data.length}
-          totalPages={Math.ceil(data.length / itemsPerPage)}
-          itemsPerPage={itemsPerPage}
-          onSetPage={setCurrentPageIndex}
-        />
+        {!loading && totalPages > 1 && (
+          <Pagination
+            currentPage={currentPageIndex}
+            totalItems={data.length}
+            totalPages={totalPages}
+            itemsPerPage={itemsPerPage}
+            onPageChange={setCurrentPageIndex}
+          />
+        )}
       </Row>
     </Column>
   )

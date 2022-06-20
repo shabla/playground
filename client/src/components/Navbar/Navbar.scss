@@ -1,5 +1,6 @@
 .navbar {
   position: fixed;
+  z-index: 40;
   height: var(--navbar-height);
   top: 0;
   left: 0;

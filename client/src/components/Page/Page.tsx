@@ -1,7 +1,8 @@
 import React from "react";
 import classNames from "classnames";
+import { NavLink } from "react-router-dom";
 
-import { PageTitle, FlexContainer, FlexContainerProps, Column, Navbar } from "@/components";
+import { PageTitle, FlexContainer, FlexContainerProps, Column, Row, Navbar } from "@/components";
 
 import "./Page.scss"
 
