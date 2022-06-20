@@ -38,7 +38,7 @@ export const Table = <T extends {} = any>({
       defaultSortColumnIndex != null && defaultSortColumnIndex < columns?.length ? 'asc' : undefined
     )
   );
-  const [currentPageIndex, setCurrentPageIndex] = useState<number>(3);
+  const [currentPageIndex, setCurrentPageIndex] = useState<number>(0);
   const [itemsPerPage, setItemsPerPage] = useState<number>(2);
   const [displayedRows, setDisplayedRows] = useState<T[]>([]);
 
@@ -94,7 +94,7 @@ export const Table = <T extends {} = any>({
               {columns.map((column, colIndex) => {
                 const isSortedColumn = sortColumnIndex === colIndex;
                 const isSortedAsc = sortDirection === 'asc';
-                const isSortedDesc = sortDirection === 'asc';
+                const isSortedDesc = sortDirection === 'desc';
 
                 return (
                   <th
@@ -168,15 +168,21 @@ export const Table = <T extends {} = any>({
       </Column>
 
       <Row align="space-between end" className="table-footer">
-        <ItemsPerPage
-          value={itemsPerPage}
-          items={itemsPerPageOptions}
-          disabled={loading}
-          onChange={value => {
-            setItemsPerPage(value);
-            setCurrentPageIndex(0);
-          }}
-        />
+        <Row align="start center">
+          <ItemsPerPage
+            value={itemsPerPage}
+            items={itemsPerPageOptions}
+            disabled={loading}
+            onChange={value => {
+              setItemsPerPage(value);
+              setCurrentPageIndex(0);
+            }}
+          />
+
+          <div className="ml-10">
+            Showing <b className="mx-5">{(currentPageIndex * itemsPerPage) + 1} to {Math.min((currentPageIndex * itemsPerPage) + itemsPerPage, data.length)}</b>of<b className="ml-5">{data.length}</b> rows
+          </div>
+        </Row>
 
         {!loading && totalPages > 1 && (
           <Pagination
