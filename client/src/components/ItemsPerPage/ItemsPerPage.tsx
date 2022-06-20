@@ -13,12 +13,11 @@ export const ItemsPerPage: React.FC<ItemsPerPageProps> = ({
 }) => {
   return (
     <div className="items-per-page">
-      <select onChange={e => onChange(parseInt(e.currentTarget.value, 10))}>
+      <select value={value} onChange={e => onChange(parseInt(e.currentTarget.value, 10))}>
         {items.map(item => (
           <option
             key={item}
             value={item}
-            selected={item === value}
           >
             {item}
           </option>

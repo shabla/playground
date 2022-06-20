@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Intent, IntentType, InputSize, InputSizeType, } from '@/values';
-import { Button, ButtonProps } from '@/components';
+import { Button, ButtonProps, Row, Column } from '@/components';
 
 const intentOptions: { value: IntentType, label: string }[] = [
   { value: Intent.None, label: 'None' },
@@ -51,41 +51,43 @@ export const ButtonExample: React.FC = () => {
 
   return (
     <div className="ButtonExample">
-      <div className="flex flex-row mb-10">
+      <Row className="mb-10" align="start center" gap={15}>
         {intentOptions.map(option => (
-          <label htmlFor={option.value} className="mr-10" key={option.value || 'none'}>
+          <label htmlFor={option.value} key={option.value || 'none'}>
             <input
               type="radio"
               id={option.value}
               value={option.value}
               checked={intent === option.value}
               onChange={e => setIntent(e.currentTarget.value ? e.currentTarget.value as IntentType : undefined)}
+              className="mr-5"
             />
             {option.label}
           </label>
         ))}
 
         <Button onClick={() => setIsLoading(value => !value)}>Toggle Loading</Button>
-      </div>
+      </Row>
 
       {sections.map((section, sectionId) => (
-        <div className="flex flex-column mb-10" key={sectionId}>
-          <h2>{section.name}</h2>
+        <Column gap={10} key={sectionId} className="mb-20">
+          <h2 className="m-0">{section.name}</h2>
+
           {section.buttonProps.map((buttonProps, rowIndex) => (
-            <div className="flex flex-row mb-15" key={rowIndex}>
+            <Row gap={10} key={rowIndex}>
               {sizes.map((size, colIndex) => (
-                <div className="flex flex-column mr-5" key={colIndex}>
+                <Column key={colIndex}>
                   <Button
                     intent={intent as IntentType}
                     size={size as InputSizeType}
                     loading={isLoading}
                     {...buttonProps}
                   />
-                </div>
+                </Column>
               ))}
-            </div>
+            </Row>
           ))}
-        </div>
+        </Column>
       ))}
     </div>
   );

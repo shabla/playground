@@ -11,7 +11,6 @@ export interface PageProps extends Partial<FlexContainerProps> {
   className?: string;
   noPadding?: boolean;
   header?: React.ReactNode;
-  navigation?: React.ReactNode;
   showNavbar?: boolean;
   pageContentContainerProps?: Partial<FlexContainerProps>;
 }
@@ -25,7 +24,6 @@ export const Page: React.FC<PageProps> = ({
   direction = "column",
   noPadding,
   header,
-  navigation,
   pageContentContainerProps,
   ...flexContainerProps
 }) => {
@@ -40,7 +38,6 @@ export const Page: React.FC<PageProps> = ({
       {showNavbar && <Navbar />}
       {title && <PageTitle title={title} />}
       {header}
-      {navigation}
       <Column
         className={classNames("page--content", {
           'p-10': !noPadding

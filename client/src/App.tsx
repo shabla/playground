@@ -4,7 +4,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import appConfig from "./appConfig";
 import { init as initDialogSystemModule } from "@/modules/dialog-system";
 import { init as initDiceRollerModule } from "@/modules/dice-roller";
-import { init as initAtlasModule } from "@/modules/atlas";
 import { init as initECSModule } from "@/modules/ecs";
 import { init as initUIShowcaseModule } from "@/modules/ui-showcase";
 import { init as initAuthModule, TokenRefresher } from "@/modules/auth";
@@ -20,7 +19,6 @@ appConfig.reset();
 
 initAuthModule();
 initHomeModule();
-initAtlasModule();
 initDialogSystemModule();
 initDiceRollerModule();
 initECSModule();

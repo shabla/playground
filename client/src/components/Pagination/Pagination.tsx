@@ -9,6 +9,7 @@ export interface PaginationProps {
   currentPage: number;
   itemsPerPage: number;
   totalItems: number;
+  totalPages: number;
   maxDynamicPages?: number;
   onSetPage: (page: number) => void;
 }
@@ -17,6 +18,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   itemsPerPage,
   totalItems,
+  totalPages,
   maxDynamicPages = 3,
   onSetPage,
 }) => {
@@ -33,7 +35,9 @@ export const Pagination: React.FC<PaginationProps> = ({
   }
 
   const buttons: React.ReactNode[] = [
+    // First button always displayed
     <Button
+      key={1}
       intent={currentPage === 0 ? "primary" : undefined}
       simple={currentPage !== 0}
       onClick={() => onSetPage(0)}
@@ -41,7 +45,6 @@ export const Pagination: React.FC<PaginationProps> = ({
       1
     </Button>
   ];
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   if (totalPages > 2) {
     let dynPages = totalPages - 2;
@@ -57,6 +60,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       for (let i = firstDynPage; i < lastDynPage; i++) {
         buttons.push(
           <Button
+            key={i + 1}
             intent={currentPage === i ? "primary" : undefined}
             simple={currentPage !== i}
             onClick={() => onSetPage(i)}
@@ -67,7 +71,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       }
 
     } else {
-      console.log("dyn pages", dynPages)
+      // console.log("dyn pages", dynPages)
 
       // TODO: this is broken
       const half = Math.floor(dynPages / 2);
@@ -83,12 +87,11 @@ export const Pagination: React.FC<PaginationProps> = ({
       }
 
       for (let offset = leftOffset; offset <= rightOffset; offset++) {
-        console.log('offset', offset)
-
         const page = currentPage + offset;
 
         buttons.push(
           <Button
+            key={page + 1}
             intent={currentPage === page ? "primary" : undefined}
             simple={currentPage !== page}
             onClick={() => onSetPage(page)}
@@ -98,23 +101,24 @@ export const Pagination: React.FC<PaginationProps> = ({
         )
       }
     }
-
-
   }
 
-  console.log(`
-  itemsPerPage: ${itemsPerPage}
-  totalItems:   ${totalItems}
-  currentPage:  ${currentPage}
-  totalPages:   ${totalPages}
-  `)
+  // console.log(`
+  // itemsPerPage: ${itemsPerPage}
+  // totalItems:   ${totalItems}
+  // currentPage:  ${currentPage}
+  // totalPages:   ${totalPages}
+  // `)
 
   if (totalPages > 1) {
+    // If we have more than 1 page, last page button is always displayed
+    const lastPageIndex = totalPages - 1;
     buttons.push(
       <Button
-        intent={currentPage === totalPages - 1 ? "primary" : undefined}
-        simple={currentPage !== totalPages - 1}
-        onClick={() => onSetPage(totalPages - 1)}
+        key={totalPages}
+        intent={currentPage === lastPageIndex ? "primary" : undefined}
+        simple={currentPage !== lastPageIndex}
+        onClick={() => onSetPage(lastPageIndex)}
       >
         {totalPages}
       </Button>

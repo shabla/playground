@@ -15,3 +15,4 @@ export * from './Table/Table';
 export * from './Table/models/TableColumn';
 export * from './Pagination/Pagination';
 export * from './ItemsPerPage/ItemsPerPage';
+export * from './Dialog/Dialog';

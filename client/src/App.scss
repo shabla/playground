@@ -1,4 +1,6 @@
 .App {
   height: 100%;
   display: flex;
+  background-color: var(--app-background-color);
+  color: var(--ink-base);
 }

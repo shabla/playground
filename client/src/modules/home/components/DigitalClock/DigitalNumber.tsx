@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 import "./DigitalNumber.scss"
 
-const numbers: Record<number, number[][]> = {
+const characters: Record<number | string, number[][]> = {
   0: [
     [1, 1, 1],
     [1, 0, 1],
@@ -74,19 +74,27 @@ const numbers: Record<number, number[][]> = {
     [0, 0, 1],
     [0, 0, 1],
   ],
+  ':': [
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0],
+  ],
+  '': [
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+    [0, 0, 0],
+  ]
 };
 
-const EMPTY_NUMBER = [
-  [0, 0, 0],
-  [0, 0, 0],
-  [0, 0, 0],
-];
-
-export const DigitalNumber: FC<{ number: number }> = ({ number }) => {
-  const [pixels, setPixels] = useState<number[][]>(EMPTY_NUMBER);
+export const DigitalNumber: FC<{ number: number | string }> = ({ number }) => {
+  const [pixels, setPixels] = useState<number[][]>(characters['']);
 
   useEffect(() => {
-    setPixels(numbers[number] || EMPTY_NUMBER);
+    setPixels(characters[number] || characters['']);
   }, [number]);
 
   return (

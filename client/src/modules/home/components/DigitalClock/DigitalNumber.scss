@@ -1,11 +1,6 @@
 .DigitalNumber {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  margin-right: 5px;
-
-  &:nth-of-type(2n) {
-    margin-right: 20px;
-  }
 
   .cell {
     height: 20px;

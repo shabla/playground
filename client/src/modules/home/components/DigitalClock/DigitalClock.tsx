@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 
+import { Row } from "@/components";
 import { DigitalNumber } from "./DigitalNumber";
 
 export const DigitalClock: React.FC = () => {
-  const [numbers, setNumbers] = useState<number[]>([]);
+  const [numbers, setNumbers] = useState<(number | string)[]>([]);
 
   useEffect(() => {
     const updateClock = () => {
@@ -27,7 +28,7 @@ export const DigitalClock: React.FC = () => {
         .split("")
         .map((nbStr) => parseInt(nbStr));
 
-      setNumbers([...hours, ...minutes, ...seconds]);
+      setNumbers([...hours, ':', ...minutes, ':', ...seconds]);
     };
 
     updateClock();
@@ -40,8 +41,8 @@ export const DigitalClock: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex flex-row">
+    <Row gap={10}>
       {numbers.map((nb, nbIndex) => <DigitalNumber number={nb} key={nbIndex} />)}
-    </div>
+    </Row>
   );
 };

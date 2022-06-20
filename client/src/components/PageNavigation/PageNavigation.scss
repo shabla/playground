@@ -3,9 +3,11 @@
   $height: 45px;
   $bg-color: #eee;
   $border-color: #cacaca;
-  $border-selected-color: blue;
+  $border-selected-color: var(--intent-primary-color-base);
+  $link-ink-color: black;
+  $link-selected-ink-color: var(--intent-primary-color-base);
   $link-bg-color: transparent;
-  $link-hover-bg-color: #ccc;
+  $link-hover-bg-color: rgba(0, 0, 0, 0.05);
 
   background: $bg-color;
   border-bottom: $border-size solid $border-color;
@@ -17,7 +19,7 @@
     margin-bottom: -$border-size;
     background-color: $link-bg-color;
     border-right: 1px solid $border-color;
-    color: black;
+    color: $link-ink-color;
 
     &:hover {
       background: $link-hover-bg-color;
@@ -25,12 +27,13 @@
     }
 
     &.selected {
+      color: $link-selected-ink-color;
       border-bottom: $border-size solid $border-selected-color;
       font-weight: bold;
     }
   }
 
-  >* {
+  a:last-of-type>* {
     border-right: 0;
   }
 }
